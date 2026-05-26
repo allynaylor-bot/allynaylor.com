@@ -10,12 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --teal: #2a7c7c;
+      --teal: #2a9d9d;
       --teal-dark: #1e5c5c;
       --teal-light: #e8f4f4;
-      --coral: #d4735a;
+      --coral: #e8604c;
       --coral-light: #f9ede8;
-      --blue: #2c5f8a;
+      --blue: #3a7ca5;
+      --navy: #1a3a4a;
+      --pale-teal: #7bbfbf;
       --cream: #f5f0e8;
       --warm-white: #faf8f4;
       --charcoal: #2d2d2d;
@@ -49,7 +51,7 @@
       align-items: center;
       padding: 1.2rem 3rem;
       background: var(--cream);
-      border-bottom: 1px solid rgba(42,124,124,0.15);
+      border-bottom: 1px solid rgba(42,157,157,0.15);
     }
 
     .nav-logo {
@@ -318,7 +320,7 @@
       top: -100px; right: -100px;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.05);
     }
 
     .tbi-inner {
@@ -405,7 +407,7 @@
 
     /* ADVOCACY SECTION */
     .advocacy {
-      background: var(--cream);
+      background: var(--navy);
       padding: 6rem 2rem;
     }
 
@@ -422,7 +424,7 @@
       background: white;
       border-radius: 16px;
       padding: 2.5rem;
-      border-top: 4px solid var(--blue);
+      border-top: 4px solid var(--pale-teal);
       box-shadow: 0 4px 24px rgba(0,0,0,0.06);
     }
 
@@ -448,7 +450,7 @@
 
     /* FOOTER */
     footer {
-      background: var(--charcoal);
+      background: var(--navy);
       color: rgba(255,255,255,0.6);
       padding: 3rem 2rem;
     }
@@ -583,20 +585,24 @@
       <div class="about-visual fade-in">
         <div class="about-card">
           <h3 class="about-card-title">Where I've worked</h3>
-          <p style="line-height:2;">
-            Senior Consultant &amp; Business Manager · <strong>Frank Engagement</strong><br/>
-            Associate Producer · <strong>Grundy Productions</strong><br/>
-            Global Engagement Adviser · <strong>Xero</strong><br/>
-            IT Project Coordinator · <strong>Xero</strong><br/>
-            Client Manager · <strong>Gen-i (Spark)</strong><br/>
-            Producer &amp; Production Manager · <strong>Dpod</strong><br/>
-            Account Manager · <strong>Acumen Republic</strong>
-          </p>
-          <a href="https://www.linkedin.com/in/ally-naylor-54257b31/" target="_blank" class="btn btn-outline" style="margin-top: 0.75rem; font-size: 0.8rem; padding: 0.5rem 1.2rem;">View my LinkedIn →</a>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem;">
+            <div><strong style="color:white;font-size:0.9rem;">Frank Engagement</strong><br/><span style="font-size:0.82rem;opacity:0.8;">Senior Consultant · Business Manager</span></div>
+            <div><strong style="color:white;font-size:0.9rem;">Grundy Productions</strong><br/><span style="font-size:0.82rem;opacity:0.8;">Associate Producer</span></div>
+            <div><strong style="color:white;font-size:0.9rem;">Xero</strong><br/><span style="font-size:0.82rem;opacity:0.8;">Global Engagement Adviser · IT Project Coordinator</span></div>
+            <div><strong style="color:white;font-size:0.9rem;">Gen-i (Spark)</strong><br/><span style="font-size:0.82rem;opacity:0.8;">Client Manager</span></div>
+            <div><strong style="color:white;font-size:0.9rem;">Dpod</strong><br/><span style="font-size:0.82rem;opacity:0.8;">Producer · Production Manager</span></div>
+            <div><strong style="color:white;font-size:0.9rem;">Acumen Republic</strong><br/><span style="font-size:0.82rem;opacity:0.8;">Account Manager</span></div>
+          </div>
+          <a href="https://www.linkedin.com/in/ally-naylor-54257b31/" target="_blank" class="btn btn-outline" style="margin-top: 1rem; font-size: 0.8rem; padding: 0.5rem 1.2rem;">View my LinkedIn →</a>
         </div>
         <div class="about-card">
           <h3 class="about-card-title">How I work</h3>
-          <p>Calm under pressure · Solutions-focused · Creative when needed · Structured when required · Clear communicator · Gets things done</p>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem;font-size:0.85rem;line-height:1.6;color:var(--mid-grey);">
+            <div>🧠 <strong style="color:var(--teal-dark);">Strategic thinker</strong><br/>I understand the big picture and can translate it into practical action.</div>
+            <div>🤝 <strong style="color:var(--teal-dark);">People-first</strong><br/>Empathic by nature. I listen well, build trust quickly, and bring people with me.</div>
+            <div>⚡ <strong style="color:var(--teal-dark);">Gets things done</strong><br/>Calm under pressure. Solutions-focused. I don't just advise — I deliver.</div>
+            <div>🎨 <strong style="color:var(--teal-dark);">Creative meets structured</strong><br/>I make complex ideas clear, accessible and — where possible — beautiful.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -659,14 +665,14 @@
   <section class="advocacy" id="advocacy">
     <div class="advocacy-inner">
       <div class="fade-in">
-        <p class="section-label">SHSA Advocacy</p>
-        <h2 class="section-title">Speaking up so others don't have to stay silent</h2>
-        <p class="section-body">
+        <p class="section-label" style="color:#7bbfbf;">SHSA Advocacy</p>
+        <h2 class="section-title" style="color:white;">Speaking up so others don't have to stay silent</h2>
+        <p class="section-body" style="color:rgba(255,255,255,0.75);">
           After publicly sharing my experience of workplace sexual harassment and assault, 
           I am determined to make it easier for others to speak up — and for organisations 
           to respond with best practice processes that actually protect people.
         </p>
-        <p class="section-body" style="margin-top: 1rem;">
+        <p class="section-body" style="margin-top: 1rem;color:rgba(255,255,255,0.75);">
           Shared Story Collective is for two audiences: people navigating their own experience 
           who need support, information and community — and organisations who want to build 
           genuinely safe, responsive workplaces. Because silence protects the wrong people.
