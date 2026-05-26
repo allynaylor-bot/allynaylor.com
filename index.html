@@ -32,6 +32,12 @@
       overflow-x: hidden;
     }
 
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
     /* NAV */
     nav {
       position: fixed;
@@ -75,13 +81,18 @@
     .hero {
       min-height: 100vh;
       background: var(--cream);
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      padding: 8rem 3rem 4rem;
       gap: 4rem;
-      position: relative;
-      overflow: hidden;
     }
 
     .hero::before {
@@ -166,46 +177,26 @@
     .hero-image-card {
       background: var(--teal);
       border-radius: 16px;
-      aspect-ratio: 4/5;
-      display: flex;
-      align-items: flex-end;
-      padding: 2rem;
+      aspect-ratio: 3/4;
       overflow: hidden;
       position: relative;
+      box-shadow: 0 20px 60px rgba(30,92,92,0.25);
     }
 
-    .hero-image-card::before {
-      content: '';
+    .hero-image-card img {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 60%, #0f3333 100%);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
 
-    .hero-image-pattern {
+    .hero-image-card .hero-image-overlay {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      opacity: 0.08;
-      background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 20px,
-        white 20px,
-        white 21px
-      );
-    }
-
-    .hero-image-text {
-      position: relative;
-      z-index: 1;
-      color: white;
-    }
-
-    .hero-image-text p {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      opacity: 0.9;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(30,92,92,0.88));
+      padding: 2rem;
+      z-index: 2;
     }
 
     /* SECTION SHARED */
@@ -238,6 +229,12 @@
     /* ABOUT */
     .about {
       background: var(--warm-white);
+      padding: 6rem 2rem;
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6rem;
@@ -286,7 +283,7 @@
       gap: 0.75rem;
     }
 
-    .about-card:nth-child(1) { background: var(--teal); color: white; grid-column: span 2; }
+    .about-card:nth-child(1) { background: var(--teal); color: white; grid-column: span 1; }
     .about-card:nth-child(2) { background: var(--coral-light); }
     .about-card:nth-child(3) { background: var(--cream); }
 
@@ -297,6 +294,8 @@
 
     .about-card:nth-child(1) .about-card-title { color: white; }
     .about-card:nth-child(1) p { color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.6; }
+    .about-card:nth-child(1) a { color: white; border-color: white; }
+    .about-card:nth-child(1) a:hover { background: white; color: var(--teal); }
 
     .about-card:nth-child(2) .about-card-title,
     .about-card:nth-child(3) .about-card-title { color: var(--teal-dark); }
@@ -309,6 +308,7 @@
       color: white;
       position: relative;
       overflow: hidden;
+      padding: 6rem 2rem;
     }
 
     .tbi::before {
@@ -321,6 +321,8 @@
     }
 
     .tbi-inner {
+      max-width: 1100px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6rem;
@@ -369,6 +371,12 @@
     /* ART SECTION */
     .art {
       background: var(--coral-light);
+      padding: 6rem 2rem;
+    }
+
+    .art-inner {
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
     .art-header {
@@ -394,35 +402,15 @@
       font-size: 0.95rem;
     }
 
-    .art-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .art-item {
-      border-radius: 12px;
-      overflow: hidden;
-      aspect-ratio: 1;
-      background: var(--teal-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .art-item-label {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      color: var(--teal);
-      font-size: 0.9rem;
-      text-align: center;
-      padding: 1rem;
-    }
-
     /* ADVOCACY SECTION */
     .advocacy {
       background: var(--cream);
+      padding: 6rem 2rem;
+    }
+
+    .advocacy-inner {
+      max-width: 1100px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6rem;
@@ -461,7 +449,12 @@
     footer {
       background: var(--charcoal);
       color: rgba(255,255,255,0.6);
-      padding: 3rem;
+      padding: 3rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -506,13 +499,13 @@
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .hero-inner { grid-template-columns: 1fr; }
       .hero-image { display: none; }
-      section { padding: 4rem 1.5rem; }
-      .about, .tbi-inner, .advocacy { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-inner, .tbi-inner, .advocacy-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-stats { grid-template-columns: 1fr 1fr; }
-      .art-grid { grid-template-columns: 1fr 1fr; }
-      footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+      footer { padding: 2rem 1.5rem; }
+      .footer-inner { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -520,40 +513,40 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">Ally Naylor</a>
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#tbi">TBI & Recovery</a></li>
-      <li><a href="#art">Creative</a></li>
-      <li><a href="#advocacy">SHSA Advocacy</a></li>
-    </ul>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+      <a href="#" class="nav-logo">Ally Naylor</a>
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#tbi">TBI & Recovery</a></li>
+        <li><a href="#art">Creative</a></li>
+        <li><a href="#advocacy">SHSA Advocacy</a></li>
+      </ul>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-text fade-in">
-      <p class="hero-eyebrow">Napier, New Zealand</p>
-      <h1 class="hero-title">
-        Consultant.<br/>
-        Creator.<br/>
-        <em>Survivor.</em>
-      </h1>
-      <p class="hero-body">
-        Kia ora 👋 I'm Ally — a consultant, artist, TBI survivor, and sexual assault survivor. 
-        Just like you, I'm a human just trying to figure out this thing called life. 
-        Here is a bit about me and the things I'm passionate about.
-      </p>
-      <div class="hero-links">
-        <a href="#work" class="btn btn-primary">My Work</a>
-        <a href="#tbi" class="btn btn-outline">TBI & Recovery</a>
+    <div class="hero-inner">
+      <div class="hero-text fade-in">
+        <p class="hero-eyebrow">Aotearoa, New Zealand</p>
+        <h1 class="hero-title">
+          Consultant.<br/>
+          Creator.<br/>
+          <em>Survivor.</em>
+        </h1>
+        <p class="hero-body">
+          Kia ora 👋 I'm Ally — a consultant, artist, TBI survivor, and sexual assault survivor. 
+          Just like you, I'm a human just trying to figure out this thing called life. 
+          Here is a bit about me and the things I'm passionate about.
+        </p>
+
       </div>
-    </div>
-    <div class="hero-image fade-in">
-      <div class="hero-image-card">
-        <div class="hero-image-pattern"></div>
-        <img src="profile.jpg" alt="Ally Naylor" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center top;mix-blend-mode:normal;opacity:0.92;border-radius:16px;" />
-        <div class="hero-image-text" style="position:relative;z-index:2;background:linear-gradient(transparent, rgba(30,92,92,0.85));width:calc(100% + 4rem);margin:-2rem;padding:2rem;border-radius:0 0 16px 16px;">
-          <p>"I'll always be chasing another percentage better — that's just who I am."</p>
+      <div class="hero-image fade-in">
+        <div class="hero-image-card">
+          <img src="data:image/jpeg;base64,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" alt="Ally Naylor" />
+          <div class="hero-image-overlay">
+            <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:1rem; color:white; line-height:1.6; opacity:0.9;">"I'll always be chasing another percentage better — that's just who I am."</p>
+          </div>
         </div>
       </div>
     </div>
@@ -561,39 +554,41 @@
 
   <!-- WORK SECTION -->
   <section class="about" id="work">
-    <div class="fade-in">
-      <p class="section-label">Work</p>
-      <h2 class="section-title">Turning complexity into clarity</h2>
-      <p class="section-body">
-        My sweet spot is understanding how people, systems and processes work together — 
-        and helping organisations get clear on that too. I make ideas, processes and 
-        information beautiful, accessible and actionable. I bring both the thinking and the doing.
-      </p>
-      <p class="section-body" style="margin-top: 1rem;">
-        I've worked across stakeholder engagement, internal communications, IT project 
-        coordination, change management, business operations and video production. 
-        I'm as comfortable in a boardroom as I am in a spreadsheet.
-      </p>
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-number">20+</div>
-          <div class="stat-label">Years across comms, IT, engagement & operations</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">BA</div>
-          <div class="stat-label">Waikato University + PGDip Counselling (in progress)</div>
+    <div class="about-inner">
+      <div class="fade-in">
+        <p class="section-label">Work</p>
+        <h2 class="section-title">Turning complexity into clarity</h2>
+        <p class="section-body">
+          My sweet spot is understanding how people, systems and processes work together — 
+          and helping organisations get clear on that too. I make ideas, processes and 
+          information beautiful, accessible and actionable. I bring both the thinking and the doing.
+        </p>
+        <p class="section-body" style="margin-top: 1rem;">
+          I've worked across stakeholder engagement, internal communications, IT project 
+          coordination, change management, business operations and video production. 
+          I'm as comfortable in a boardroom as I am in a spreadsheet.
+        </p>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Years across comms, IT, engagement & operations</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">BA</div>
+            <div class="stat-label">Waikato University + PGDip Counselling (in progress)</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="about-visual fade-in">
-      <div class="about-card">
-        <h3 class="about-card-title">Where I've worked</h3>
-        <p>Frank Engagement · Grundy Productions · Xero · Spark · NZME · Dpod · Acumen Republic</p>
-        <a href="https://www.linkedin.com/in/ally-naylor-54257b31/" target="_blank" class="btn btn-outline" style="margin-top: 0.75rem; font-size: 0.8rem; padding: 0.5rem 1.2rem;">View my LinkedIn →</a>
-      </div>
-      <div class="about-card">
-        <h3 class="about-card-title">How I work</h3>
-        <p>Calm under pressure · Solutions-focused · Creative when needed · Structured when required · Clear communicator · Gets things done</p>
+      <div class="about-visual fade-in">
+        <div class="about-card">
+          <h3 class="about-card-title">Where I've worked</h3>
+          <p>Frank Engagement · Grundy Productions · Xero · Spark · NZME · Dpod · Acumen Republic</p>
+          <a href="https://www.linkedin.com/in/ally-naylor-54257b31/" target="_blank" class="btn btn-outline" style="margin-top: 0.75rem; font-size: 0.8rem; padding: 0.5rem 1.2rem;">View my LinkedIn →</a>
+        </div>
+        <div class="about-card">
+          <h3 class="about-card-title">How I work</h3>
+          <p>Calm under pressure · Solutions-focused · Creative when needed · Structured when required · Clear communicator · Gets things done</p>
+        </div>
       </div>
     </div>
   </section>
@@ -630,77 +625,78 @@
 
   <!-- ART SECTION -->
   <section class="art" id="art">
-    <div class="art-header">
-      <div class="fade-in">
-        <p class="section-label">Creative</p>
-        <h2 class="section-title">My creative playground</h2>
-        <p class="section-body">
-          Reconnecting with creativity has been one of the most powerful parts of my recovery. 
-          I work across acrylic painting, sculptural wall hangings, and mixed media — 
-          often drawn to bold colour, geometric form, and the textures of found materials.
-          Winner, Sculpture Category, Artfully Yours 2025.
-        </p>
+    <div class="art-inner">
+      <div class="art-header">
+        <div class="fade-in">
+          <p class="section-label">Creative</p>
+          <h2 class="section-title">My creative playground</h2>
+          <p class="section-body">
+            Reconnecting with creativity has been one of the most powerful parts of my recovery. 
+            I work across acrylic painting, sculptural wall hangings, and mixed media — 
+            often drawn to bold colour, geometric form, and the textures of found materials.
+            Winner, Sculpture Category, Artfully Yours 2025.
+          </p>
+        </div>
+        <a href="https://www.instagram.com/ally.naylor.art/" target="_blank" class="btn btn-primary fade-in">Follow on Instagram →</a>
       </div>
-      <a href="https://www.instagram.com/ally.naylor.art/" target="_blank" class="btn btn-primary fade-in">Follow on Instagram →</a>
-    </div>
-    <!-- Instagram embed placeholder — replace with Behold.so embed code once connected -->
-    <div class="art-embed-placeholder fade-in">
-      <p>🎨 Instagram gallery loads here — connect via <strong>Behold.so</strong> using <strong>@ally.naylor.art</strong></p>
-      <p style="font-size: 0.8rem; margin-top: 0.5rem;">Switch @ally.naylor.art to a Professional account in Instagram settings → go to behold.so → connect → paste embed code here</p>
+      <div class="art-embed-placeholder fade-in">
+        <p>🎨 Instagram gallery loads here — connect via <strong>Behold.so</strong> using <strong>@ally.naylor.art</strong></p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Switch @ally.naylor.art to a Professional account in Instagram settings → go to behold.so → connect → paste embed code here</p>
+      </div>
     </div>
   </section>
 
   <!-- ADVOCACY SECTION -->
   <section class="advocacy" id="advocacy">
-    <div class="fade-in">
-      <p class="section-label">SHSA Advocacy</p>
-      <h2 class="section-title">Speaking up so others don't have to stay silent</h2>
-      <p class="section-body">
-        After publicly sharing my experience of workplace sexual harassment and assault, 
-        I am determined to make it easier for others to speak up — and for organisations 
-        to respond with best practice processes that actually protect people.
-      </p>
-      <p class="section-body" style="margin-top: 1rem;">
-        Shared Story Collective is for two audiences: people navigating their own experience 
-        who need support, information and community — and organisations who want to build 
-        genuinely safe, responsive workplaces. Because silence protects the wrong people.
-      </p>
-    </div>
-    <div class="fade-in">
-      <div class="advocacy-card">
-        <h3>Shared Story Collective</h3>
-        <p>
-          Resources, legal information, and a shared impact wall for people navigating 
-          workplace sexual harassment and assault. Plus best practice guidance for 
-          organisations committed to doing better.
+    <div class="advocacy-inner">
+      <div class="fade-in">
+        <p class="section-label">SHSA Advocacy</p>
+        <h2 class="section-title">Speaking up so others don't have to stay silent</h2>
+        <p class="section-body">
+          After publicly sharing my experience of workplace sexual harassment and assault, 
+          I am determined to make it easier for others to speak up — and for organisations 
+          to respond with best practice processes that actually protect people.
         </p>
-        <a href="https://sharedstorycollective.org" class="btn btn-blue">Visit Shared Story Collective →</a>
+        <p class="section-body" style="margin-top: 1rem;">
+          Shared Story Collective is for two audiences: people navigating their own experience 
+          who need support, information and community — and organisations who want to build 
+          genuinely safe, responsive workplaces. Because silence protects the wrong people.
+        </p>
+      </div>
+      <div class="fade-in">
+        <div class="advocacy-card">
+          <h3>Shared Story Collective</h3>
+          <p>
+            Resources, legal information, and a shared impact wall for people navigating 
+            workplace sexual harassment and assault. Plus best practice guidance for 
+            organisations committed to doing better.
+          </p>
+          <a href="https://sharedstorycollective.org" class="btn btn-blue">Visit Shared Story Collective →</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Ally Naylor</div>
-    <ul class="footer-links">
-      <li><a href="https://brainrecoverymap.com">Brain Recovery Map</a></li>
-      <li><a href="https://sharedstorycollective.org">Shared Story Collective</a></li>
-      <li><a href="https://www.instagram.com/ally.naylor.art/">Art on Instagram</a></li>
-      <li><a href="https://www.linkedin.com/in/ally-naylor-54257b31/">LinkedIn</a></li>
-    </ul>
-    <p class="footer-copy">© 2026 Ally Naylor · Napier, Aotearoa New Zealand</p>
+    <div class="footer-inner">
+      <div class="footer-logo">Ally Naylor</div>
+      <ul class="footer-links">
+        <li><a href="https://brainrecoverymap.com">Brain Recovery Map</a></li>
+        <li><a href="https://sharedstorycollective.org">Shared Story Collective</a></li>
+        <li><a href="https://www.instagram.com/ally.naylor.art/">Art on Instagram</a></li>
+        <li><a href="https://www.linkedin.com/in/ally-naylor-54257b31/">LinkedIn</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Ally Naylor · Aotearoa, New Zealand</p>
+    </div>
   </footer>
 
   <script>
-    // Fade in on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(el => {
-        if (el.isIntersecting) {
-          el.target.classList.add('visible');
-        }
+        if (el.isIntersecting) el.target.classList.add('visible');
       });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
 
