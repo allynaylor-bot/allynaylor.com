@@ -653,9 +653,14 @@
         </div>
         <a href="https://www.instagram.com/ally.naylor.art/" target="_blank" class="btn btn-primary fade-in">Follow on Instagram →</a>
       </div>
-      <div class="art-embed-placeholder fade-in">
-        <p>🎨 Instagram gallery loads here — connect via <strong>Behold.so</strong> using <strong>@ally.naylor.art</strong></p>
-        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Switch @ally.naylor.art to a Professional account in Instagram settings → go to behold.so → connect → paste embed code here</p>
+      <div class="fade-in" style="background:white;border-radius:16px;padding:1.5rem;border:1px solid rgba(42,157,157,0.1);">
+        <behold-widget feed-id="Su8dtZOuk1WPtqkmCsXH"></behold-widget>
+        <script>
+          (() => {
+            const d=document,s=d.createElement("script");s.type="module";
+            s.src="https://w.behold.so/widget.js";d.head.append(s);
+          })();
+        </script>
       </div>
     </div>
   </section>
@@ -700,7 +705,7 @@
         <p class="section-body">Whether it's a consulting enquiry, a question about Brain Recovery Map, something from Shared Story Collective, or just a kia ora — I'd love to hear from you.</p>
       </div>
       <div class="fade-in">
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;flex-direction:column;gap:1.25rem;">
+        <form name="contact" method="POST" action="/success.html" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;flex-direction:column;gap:1.25rem;">
           <input type="hidden" name="form-name" value="contact" />
           <p style="display:none;"><input name="bot-field" /></p>
           <div>
