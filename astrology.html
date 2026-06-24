@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astrology — Ally Naylor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --hero: #e8604c;
+      --hero-dark: #c44a38;
+      --amber: #e8a84c;
+      --teal: #2a9d9d;
+      --teal-dark: #1e5c5c;
+      --teal-light: #e8f4f4;
+      --coral-light: #f9ede8;
+      --cream: #f5f0e8;
+      --warm-white: #faf8f4;
+      --charcoal: #2d2d2d;
+      --mid-grey: #6b6b6b;
+      --light-grey: #e8e4de;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(232,96,76,0.15);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--hero);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--hero); }
+
+    /* ── HERO ── */
+    .page-hero {
+      min-height: 52vh;
+      background: var(--cream);
+      padding: 9rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: var(--coral-light);
+      opacity: 0.6;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      top: -40px; left: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      opacity: 0.5;
+    }
+    .page-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hero);
+      margin-bottom: 1rem;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: var(--teal-dark);
+      margin-bottom: 1.2rem;
+    }
+    .page-hero h1 em {
+      font-style: italic;
+      color: var(--amber);
+    }
+    .page-hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--mid-grey);
+      max-width: 560px;
+      margin-bottom: 2rem;
+    }
+    .hero-tags {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .hero-tag {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: white;
+      color: var(--teal);
+      border: 1px solid rgba(42,157,157,0.25);
+    }
+
+    /* ── STICKY SUBNAV ── */
+    .subnav {
+      position: sticky;
+      top: 66px;
+      z-index: 90;
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--light-grey);
+      padding: 0 3rem;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+    .subnav::-webkit-scrollbar { display: none; }
+    .subnav a {
+      display: block;
+      padding: 1rem 1.4rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid-grey);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .subnav a:hover { color: var(--teal); }
+    .subnav a.active { color: var(--teal-dark); border-bottom-color: var(--teal); }
+
+    /* ── SECTION SHARED ── */
+    .content-section {
+      padding: 5rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hero);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.2;
+      color: var(--teal-dark);
+      margin-bottom: 0.9rem;
+    }
+    .section-intro {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--mid-grey);
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--light-grey);
+      margin: 0;
+    }
+    .section-wrap {
+      border-top: 1px solid var(--light-grey);
+    }
+
+    /* ── PART HEADERS ── */
+    .part-header {
+      background: var(--cream);
+      padding: 3.5rem 3rem 2rem;
+      text-align: center;
+    }
+    .part-pill {
+      display: inline-block;
+      padding: 0.35rem 1.1rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+    .part-pill.one { background: var(--teal-light); color: var(--teal-dark); }
+    .part-pill.two { background: var(--coral-light); color: var(--hero-dark); }
+    .part-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--teal-dark);
+      margin-bottom: 0.75rem;
+    }
+    .part-header p {
+      font-size: 0.95rem;
+      color: var(--mid-grey);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── PLANET LIST ── */
+    .planet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .planet-row {
+      display: grid;
+      grid-template-columns: 56px 160px 1fr;
+      align-items: start;
+      gap: 1.25rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--light-grey);
+    }
+    .planet-row:last-child { border-bottom: none; }
+    .planet-sym {
+      font-size: 28px;
+      color: var(--amber);
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .planet-name-col {}
+    .planet-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--teal-dark);
+      margin-bottom: 3px;
+    }
+    .planet-governs {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--hero);
+    }
+    .planet-desc {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--mid-grey);
+    }
+
+    /* ── HOUSE LIST ── */
+    .house-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .house-row {
+      display: grid;
+      grid-template-columns: 56px 180px 1fr;
+      align-items: start;
+      gap: 1.25rem;
+      padding: 1.3rem 0;
+      border-bottom: 1px solid var(--light-grey);
+    }
+    .house-row:last-child { border-bottom: none; }
+    .house-num-badge {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--teal-dark);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .house-name-col {}
+    .house-theme {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--teal-dark);
+      margin-bottom: 3px;
+    }
+    .house-domain {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--hero);
+    }
+    .house-desc {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--mid-grey);
+    }
+
+    /* ── SIGN GRID ── */
+    .sign-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .sign-card {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 1.5rem;
+      border: 1px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .sign-card:hover { border-color: rgba(42,157,157,0.3); transform: translateY(-2px); }
+    .sign-top {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .sign-sym { font-size: 24px; color: var(--amber); line-height: 1; }
+    .sign-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--teal-dark);
+    }
+    .sign-dates {
+      font-size: 0.8rem;
+      color: var(--hero);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+    .sign-meta {
+      font-size: 0.75rem;
+      color: var(--mid-grey);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .sign-kw {
+      font-size: 0.88rem;
+      color: var(--mid-grey);
+      line-height: 1.6;
+    }
+
+    /* ── ELEMENTS ── */
+    .elements-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .elem-card {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 1.75rem;
+      border-left: 4px solid transparent;
+    }
+    .elem-card.fire { border-color: var(--hero); }
+    .elem-card.earth { border-color: #5a8a4a; }
+    .elem-card.air { border-color: var(--teal); }
+    .elem-card.water { border-color: #4a6fa5; }
+    .elem-top {
+      display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;
+    }
+    .elem-sym { font-size: 1.6rem; }
+    .elem-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--teal-dark);
+    }
+    .elem-signs {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--hero);
+      margin-bottom: 0.75rem;
+    }
+    .elem-desc {
+      font-size: 0.9rem;
+      color: var(--mid-grey);
+      line-height: 1.75;
+    }
+
+    .modes-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--teal-dark);
+      margin-bottom: 1rem;
+    }
+    .modes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+    }
+    .mode-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--light-grey);
+    }
+    .mode-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--teal-dark);
+      margin-bottom: 0.35rem;
+    }
+    .mode-signs {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.7rem;
+    }
+    .mode-desc {
+      font-size: 0.88rem;
+      color: var(--mid-grey);
+      line-height: 1.7;
+    }
+
+    /* ── ASPECTS ── */
+    .aspects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .aspect-row {
+      display: grid;
+      grid-template-columns: 90px 160px 1fr;
+      align-items: start;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--light-grey);
+    }
+    .aspect-row:last-child { border-bottom: none; }
+    .aspect-deg-block {
+      text-align: center;
+    }
+    .aspect-deg {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .aspect-sym {
+      font-size: 1.2rem;
+      color: var(--teal);
+      margin: 3px 0;
+    }
+    .aspect-angle {
+      font-size: 0.72rem;
+      color: var(--mid-grey);
+      letter-spacing: 0.05em;
+    }
+    .aspect-name-col {}
+    .aspect-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--teal-dark);
+      margin-bottom: 5px;
+    }
+    .aspect-tone {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 2px 9px;
+      border-radius: 50px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .tone-flow { background: var(--teal-light); color: var(--teal-dark); }
+    .tone-tension { background: var(--coral-light); color: var(--hero-dark); }
+    .tone-intense { background: #ede8f5; color: #4a357a; }
+    .tone-complex { background: #fef4e4; color: #8a5c1a; }
+    .aspect-desc {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--mid-grey);
+    }
+
+    /* ── HOW TRANSITS WORK ── */
+    .transit-concepts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .transit-concept-card {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 1.75rem;
+    }
+    .tc-sym {
+      font-size: 1.4rem;
+      color: var(--amber);
+      margin-bottom: 0.75rem;
+    }
+    .tc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--teal-dark);
+      margin-bottom: 0.6rem;
+    }
+    .tc-desc {
+      font-size: 0.9rem;
+      color: var(--mid-grey);
+      line-height: 1.75;
+    }
+
+    /* ── DEGREES ── */
+    .degree-band {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .degree-card {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 1.5rem;
+      border-top: 3px solid transparent;
+    }
+    .degree-card.early { border-top-color: var(--teal); }
+    .degree-card.middle { border-top-color: var(--amber); }
+    .degree-card.late { border-top-color: var(--hero); }
+    .degree-range {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--teal-dark);
+      margin-bottom: 0.3rem;
+      line-height: 1;
+    }
+    .degree-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid-grey);
+      margin-bottom: 0.75rem;
+    }
+    .degree-desc {
+      font-size: 0.9rem;
+      color: var(--mid-grey);
+      line-height: 1.75;
+    }
+    .anaretic-callout {
+      background: var(--coral-light);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      border-left: 4px solid var(--hero);
+      margin-bottom: 2rem;
+    }
+    .anaretic-callout h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--teal-dark);
+      margin-bottom: 0.5rem;
+    }
+    .anaretic-callout p {
+      font-size: 0.9rem;
+      color: var(--mid-grey);
+      line-height: 1.75;
+    }
+
+    /* ── PLACEMENT FORMULA ── */
+    .formula-wrap {
+      background: var(--teal-dark);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .formula-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .formula-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
+      min-width: 100px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .formula-pill-sym {
+      font-size: 1.4rem;
+      color: var(--amber);
+      margin-bottom: 3px;
+    }
+    .formula-pill-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .formula-pill-val {
+      font-size: 0.85rem;
+      color: white;
+      margin-top: 2px;
+    }
+    .formula-plus {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.3);
+    }
+    .formula-equals {
+      font-size: 1.2rem;
+      color: var(--amber);
+      font-weight: 500;
+    }
+    .formula-result {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: white;
+      font-style: italic;
+      line-height: 1.6;
+      padding: 1rem 1.25rem;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      border-left: 3px solid var(--amber);
+      flex: 1;
+      min-width: 200px;
+    }
+    .formula-examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .formula-eg {
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+    .formula-eg-placement {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.4rem;
+    }
+    .formula-eg-meaning {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+    }
+
+    /* ── EMPTY HOUSES & WHERE TO START ── */
+    .empty-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .empty-card {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 1.75rem;
+    }
+    .empty-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--teal-dark);
+      margin-bottom: 0.6rem;
+    }
+    .empty-card p {
+      font-size: 0.9rem;
+      color: var(--mid-grey);
+      line-height: 1.75;
+    }
+    .start-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .start-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1.25rem;
+      align-items: start;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--light-grey);
+    }
+    .start-step:last-child { border-bottom: none; }
+    .step-num {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--teal-dark);
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-body {}
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--teal-dark);
+      margin-bottom: 0.35rem;
+    }
+    .step-desc {
+      font-size: 0.9rem;
+      color: var(--mid-grey);
+      line-height: 1.7;
+    }
+    .step-eg {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--hero);
+      font-style: italic;
+    }
+
+    /* ── NATAL CHART EXAMPLE ── */
+    .natal-section {
+      background: var(--teal-dark);
+      padding: 5rem 3rem;
+    }
+    .natal-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .natal-section .section-label { color: rgba(232,168,76,0.9); }
+    .natal-section .section-title { color: white; }
+    .natal-section .section-intro { color: rgba(255,255,255,0.7); max-width: 640px; }
+
+    /* Chart wheel SVG area */
+    .natal-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+    .chart-wheel-wrap {
+      position: relative;
+    }
+    svg.wheel {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Placement table */
+    .natal-placements {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .placement-row {
+      display: grid;
+      grid-template-columns: 120px 160px 1fr;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      align-items: start;
+    }
+    .placement-row:last-child { border-bottom: none; }
+    .pl-planet {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .pl-sym { font-size: 1.1rem; color: var(--amber); }
+    .pl-name { font-size: 0.88rem; font-weight: 500; color: white; }
+    .pl-position {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .pl-meaning {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+
+    /* Example person card */
+    .example-person {
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .example-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--amber);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--teal-dark);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .example-info {}
+    .example-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: white;
+      margin-bottom: 3px;
+    }
+    .example-dob { font-size: 0.85rem; color: rgba(255,255,255,0.55); }
+
+    .natal-table-head {
+      display: grid;
+      grid-template-columns: 120px 160px 1fr;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 0;
+    }
+    .nth {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* Reading the chart narrative */
+    .chart-reading {
+      margin-top: 3rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .chart-reading h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: white;
+      margin-bottom: 1.25rem;
+    }
+    .reading-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .reading-item {}
+    .reading-layer {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.4rem;
+    }
+    .reading-statement {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 3rem;
+      text-align: center;
+    }
+    footer p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+    }
+    footer a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--amber); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { padding: 7rem 1.5rem 3rem; }
+      .content-section { padding: 3.5rem 1.5rem; }
+      .part-header { padding: 2.5rem 1.5rem 1.5rem; }
+      .natal-section { padding: 3.5rem 1.5rem; }
+
+      .planet-row, .house-row, .aspect-row {
+        grid-template-columns: 44px 1fr;
+        grid-template-rows: auto auto;
+      }
+      .planet-name-col, .house-name-col, .aspect-name-col { grid-column: 2; }
+      .planet-desc, .house-desc, .aspect-desc { grid-column: 1 / -1; }
+
+      .elements-grid { grid-template-columns: 1fr; }
+      .modes-grid { grid-template-columns: 1fr; }
+      .sign-grid { grid-template-columns: 1fr 1fr; }
+      .natal-layout { grid-template-columns: 1fr; }
+      .reading-grid { grid-template-columns: 1fr; }
+      .subnav { padding: 0 1.5rem; }
+    }
+  
+    /* ── ACCORDION ── */
+    .accordion { border-top: 1px solid var(--light-grey); }
+    .accordion-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:2rem 3rem; border-bottom:1px solid var(--light-grey); text-align:left; transition:background 0.2s; }
+    .accordion-toggle:hover { background:var(--cream); }
+    .accordion-toggle-left { display:flex; align-items:center; gap:1.25rem; }
+    .accordion-pill { display:inline-block; padding:0.3rem 0.9rem; border-radius:50px; font-size:0.75rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; }
+    .pill-101 { background:var(--teal-light); color:var(--teal-dark); }
+    .pill-102 { background:var(--coral-light); color:var(--hero-dark); }
+    .pill-103 { background:#ede8f5; color:#4a357a; }
+    .accordion-title { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--teal-dark); }
+    .accordion-sub { font-size:0.88rem; color:var(--mid-grey); margin-top:0.2rem; }
+    .accordion-arrow { width:36px; height:36px; border-radius:50%; border:1px solid var(--light-grey); background:white; display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--teal); transition:transform 0.3s; flex-shrink:0; }
+    .accordion-toggle[aria-expanded="true"] .accordion-arrow { transform:rotate(180deg); }
+    .accordion-body { display:none; }
+    .accordion-body.open { display:block; }
+
+    /* ── WORKBOOK ── */
+    .workbook-intro { padding:3rem 3rem 2rem; max-width:1100px; margin:0 auto; }
+    .workbook-intro p { font-size:1rem; line-height:1.8; color:var(--mid-grey); max-width:640px; margin-bottom:1rem; }
+    .print-tip { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.82rem; color:var(--teal); background:var(--teal-light); padding:0.5rem 1rem; border-radius:50px; }
+    .wb-step-header { background:var(--cream); border-top:1px solid var(--light-grey); padding:2rem 3rem 1.5rem; }
+    .wb-step-num { font-size:0.72rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--hero); margin-bottom:0.4rem; }
+    .wb-step-title { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--teal-dark); margin-bottom:0.5rem; }
+    .wb-step-desc { font-size:0.92rem; color:var(--mid-grey); line-height:1.7; max-width:600px; }
+    .worksheet-wrap { padding:2rem 3rem 3rem; max-width:1100px; margin:0 auto; }
+    .ws-table { width:100%; border-collapse:collapse; }
+    .ws-table th { font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:white; background:var(--teal-dark); padding:0.75rem 1rem; text-align:left; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .ws-table th:first-child { border-radius:8px 0 0 0; }
+    .ws-table th:last-child { border-radius:0 8px 0 0; }
+    .ws-table td { padding:0; border-bottom:1px solid var(--light-grey); vertical-align:top; }
+    .ws-table tr:nth-child(even) td { background:#fdf9f5; }
+    .ws-table tr:last-child td { border-bottom:none; }
+    .ws-planet-cell { padding:1rem; display:flex; align-items:center; gap:0.75rem; min-width:160px; }
+    .ws-sym { font-size:1.4rem; color:var(--amber); flex-shrink:0; width:28px; text-align:center; }
+    .ws-pname { font-family:'Playfair Display',serif; font-size:0.95rem; color:var(--teal-dark); }
+    .ws-pgov { font-size:0.72rem; color:var(--mid-grey); margin-top:1px; }
+    .ws-input-cell { padding:0.75rem; }
+    .ws-input { width:100%; min-height:36px; border:none; border-bottom:1.5px solid var(--light-grey); background:transparent; font-family:'DM Sans',sans-serif; font-size:0.88rem; color:var(--charcoal); padding:0.25rem 0.5rem; outline:none; transition:border-color 0.2s; }
+    .ws-input:focus { border-bottom-color:var(--teal); }
+    .ws-input::placeholder { color:#c8c4bc; font-style:italic; }
+    .ws-meaning-cell { padding:0.75rem; }
+    .ws-meaning { width:100%; min-height:52px; border:none; border-bottom:1.5px solid var(--light-grey); background:transparent; font-family:'DM Sans',sans-serif; font-size:0.85rem; color:var(--charcoal); line-height:1.6; padding:0.25rem 0.5rem; outline:none; resize:none; transition:border-color 0.2s; }
+    .ws-meaning:focus { border-bottom-color:var(--teal); }
+    .ws-meaning::placeholder { color:#c8c4bc; font-style:italic; }
+    .big-three-note { display:flex; align-items:flex-start; gap:1rem; background:var(--teal-light); border-radius:12px; padding:1.25rem 1.5rem; margin-bottom:2rem; border-left:4px solid var(--teal); }
+    .big-three-note p { font-size:0.9rem; color:var(--teal-dark); line-height:1.7; }
+    .ws-example-row td { background:#f0f8f8 !important; }
+    .ws-example-label { font-size:0.68rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:3px; }
+    .wheel-wrap { padding:2rem 3rem 3rem; max-width:1100px; margin:0 auto; }
+    .wheel-layout { display:grid; grid-template-columns:1fr 300px; gap:3rem; align-items:start; }
+    svg.blank-wheel { width:100%; max-width:520px; height:auto; display:block; }
+    .wi-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--teal-dark); margin-bottom:1rem; }
+    .wi-step { display:flex; gap:0.75rem; margin-bottom:1.25rem; align-items:flex-start; }
+    .wi-num { width:24px; height:24px; border-radius:50%; background:var(--teal-dark); color:white; font-size:0.75rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight:500; margin-top:1px; }
+    .wi-text { font-size:0.88rem; color:var(--mid-grey); line-height:1.65; }
+    .ref-wrap { background:var(--cream); border-top:1px solid var(--light-grey); padding:2.5rem 3rem; }
+    .ref-inner { max-width:1100px; margin:0 auto; }
+    .ref-title { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--teal-dark); margin-bottom:1.25rem; }
+    .ref-cols { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
+    .ref-group-title { font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--hero); margin-bottom:0.75rem; }
+    .ref-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:0.5rem; }
+    .ref-item { display:flex; align-items:center; gap:0.5rem; }
+    .ref-sym { font-size:1.1rem; color:var(--amber); width:22px; text-align:center; flex-shrink:0; }
+    .ref-name { font-size:0.82rem; color:var(--charcoal); }
+
+    /* ── CHART READING GUIDE ── */
+    .chart-guide { margin-bottom: 2.5rem; }
+    .chart-guide-title { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--teal-dark); margin-bottom:0.5rem; }
+    .chart-guide-desc { font-size:0.92rem; color:var(--mid-grey); line-height:1.7; max-width:640px; margin-bottom:1.5rem; }
+    .chart-anatomy { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.5rem; }
+    .anatomy-card { background:var(--cream); border-radius:14px; padding:1.5rem; border-left:4px solid transparent; }
+    .anatomy-card.wheel { border-left-color:var(--teal); }
+    .anatomy-card.table { border-left-color:var(--amber); }
+    .anatomy-card.lines { border-left-color:var(--hero); }
+    .anatomy-card.extra { border-left-color:#9b72cf; }
+    .anatomy-label { font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; }
+    .anatomy-card.wheel .anatomy-label { color:var(--teal-dark); }
+    .anatomy-card.table .anatomy-label { color:#8a5c1a; }
+    .anatomy-card.lines .anatomy-label { color:var(--hero-dark); }
+    .anatomy-card.extra .anatomy-label { color:#6b3fa0; }
+    .anatomy-title { font-family:'Playfair Display',serif; font-size:1rem; color:var(--teal-dark); margin-bottom:0.5rem; }
+    .anatomy-desc { font-size:0.88rem; color:var(--mid-grey); line-height:1.7; }
+    .anatomy-desc strong { color:var(--charcoal); }
+    .col-guide { margin-top:1.5rem; }
+    .col-guide-title { font-family:'Playfair Display',serif; font-size:1rem; color:var(--teal-dark); margin-bottom:1rem; }
+    .col-rows { display:flex; flex-direction:column; }
+    .col-row { display:grid; grid-template-columns:140px 80px 1fr; gap:1rem; padding:0.9rem 0; border-bottom:1px solid var(--light-grey); align-items:start; }
+    .col-row:last-child { border-bottom:none; }
+    .col-name { font-size:0.88rem; font-weight:500; color:var(--charcoal); }
+    .col-eg { font-size:0.85rem; color:var(--amber); font-family:'Playfair Display',serif; }
+    .col-meaning { font-size:0.85rem; color:var(--mid-grey); line-height:1.65; }
+    .col-meaning strong { color:var(--charcoal); font-weight:500; }
+    @media (max-width:768px) { .chart-anatomy { grid-template-columns:1fr; } .col-row { grid-template-columns:1fr; } }
+
+    @media print {
+      nav, .page-hero, .accordion-toggle, .subnav, footer, #body-101 { display:none !important; }
+      .accordion-body { display:block !important; }
+      body { background:white; }
+      .wb-step-header { background:none; border:none; padding:1rem 0 0.5rem; }
+      .worksheet-wrap, .wheel-wrap, .ref-wrap, .workbook-intro { padding:0.75rem 0; }
+      .ws-input, .ws-meaning { border-bottom:1px solid #ccc; }
+      svg.blank-wheel { max-width:100%; }
+      .wheel-layout { grid-template-columns:1fr 220px; gap:1.5rem; }
+      @page { margin:1.5cm; size:A4; }
+    }
+    @media (max-width:768px) {
+      .accordion-toggle { padding:1.5rem; }
+      .worksheet-wrap, .wheel-wrap, .workbook-intro { padding:2rem 1.5rem; }
+      .wb-step-header, .ref-wrap { padding:1.5rem; }
+      .wheel-layout { grid-template-columns:1fr; }
+      .ref-cols { grid-template-columns:1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Ally Naylor</a>
+  <ul class="nav-links">
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/#tbi">TBI &amp; Recovery</a></li>
+    <li><a href="/#art">Creative</a></li>
+    <li><a href="/astrology.html" class="active">Astrology</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-hero-eyebrow">A guide for beginners</p>
+    <h1>Astrology<br><em>Language of the sky</em></h1>
+    <p class="page-hero-desc">Astrology is a symbolic language — a map of the sky at the moment you were born, and a way of understanding yourself and the cycles of your life. Work through the three sections: learn the language, build your chart, then learn to live with it month by month.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">✦ 101 — The language</span>
+      <span class="hero-tag">✦ 102 — Know yourself</span>
+      <span class="hero-tag">✦ 103 — Living with it</span>
+    </div>
+  </div>
+</header>
+
+<div class="accordion">
+
+<!-- 101 TOGGLE -->
+<button class="accordion-toggle" aria-expanded="true" onclick="toggleSection(this,'body-101')">
+  <div class="accordion-toggle-left">
+    <span class="accordion-pill pill-101">101</span>
+    <div>
+      <div class="accordion-title">Understanding the language</div>
+      <div class="accordion-sub">Planets · Houses · Signs · Elements · Natal chart example</div>
+    </div>
+  </div>
+  <div class="accordion-arrow">▾</div>
+</button>
+<div id="body-101" class="accordion-body open">
+
+<!-- 101 Subnav -->
+<nav class="subnav" aria-label="101 sections">
+  <a href="#planets">Planets</a>
+  <a href="#houses">Houses</a>
+  <a href="#signs">Signs</a>
+  <a href="#elements">Elements</a>
+</nav>
+<!-- ═══════════════════════════════════════════
+     PART ONE: THE COMPONENTS
+════════════════════════════════════════════ -->
+<div id="part-one" class="part-header">
+  <span class="part-pill one">Part one</span>
+  <h2>The components</h2>
+  <p>Before you can read a chart, you need to understand its building blocks — the planets, houses, signs, and elements that together create the full picture.</p>
+</div>
+
+<!-- PLANETS -->
+<div class="section-wrap">
+  <div id="planets" class="content-section">
+    <p class="section-label">The players</p>
+    <h2 class="section-title">The planets</h2>
+    <p class="section-intro">Each planet represents a dimension of your inner life — a drive, a function, a part of your psyche. The sign a planet is in describes <em>how</em> that energy expresses. The house it sits in shows <em>where</em> in your life it plays out.</p>
+
+    <div class="planet-list">
+      <div class="planet-row">
+        <div class="planet-sym">☉</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Sun</div>
+          <div class="planet-governs">Core self &amp; identity</div>
+        </div>
+        <div class="planet-desc">Your conscious self — the narrative of who you are and what you're here to express. The Sun animates you. Its sign shows your essential character; its house shows where your vitality is most alive. It takes approximately one year to travel through all 12 signs.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">☽</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Moon</div>
+          <div class="planet-governs">Emotions &amp; inner needs</div>
+        </div>
+        <div class="planet-desc">Your emotional body — instincts, needs, and the patterns you inherited. The Moon governs how you feel safe, how you nurture and need to be nurtured, and the inner world you don't always show. It changes signs every 2–3 days, making it the most personal and variable planet.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">☿</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Mercury</div>
+          <div class="planet-governs">Mind &amp; communication</div>
+        </div>
+        <div class="planet-desc">The way you think, speak, write, and make sense of the world. Mercury governs your communication style, learning patterns, and how you process information. Never more than one sign away from the Sun, it shapes how you express your core identity in language and thought.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">♀</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Venus</div>
+          <div class="planet-governs">Love, beauty &amp; values</div>
+        </div>
+        <div class="planet-desc">What you desire, find beautiful, and move toward. Venus governs romantic love, aesthetics, pleasure, money, and self-worth. It shows how you attract and what you value deeply — both in relationships and in the material world.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">♂</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Mars</div>
+          <div class="planet-governs">Drive, desire &amp; action</div>
+        </div>
+        <div class="planet-desc">Your raw energy and will to act. Mars shows how you pursue what you want, assert yourself, handle conflict, and where your drive is strongest. It governs anger, ambition, physical energy, and the force that gets things moving.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">♃</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Jupiter</div>
+          <div class="planet-governs">Expansion &amp; meaning</div>
+        </div>
+        <div class="planet-desc">The planet of abundance, faith, and big-picture thinking. Jupiter expands whatever it touches. It governs philosophy, higher learning, long-distance travel, and the search for meaning. Its house shows where you tend to be lucky and where life invites you to grow.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">♄</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Saturn</div>
+          <div class="planet-governs">Structure &amp; mastery</div>
+        </div>
+        <div class="planet-desc">The planet of time, discipline, and hard-won authority. Saturn rules where you face tests, encounter limitation, and ultimately build real, lasting strength. It takes about 29 years to complete one orbit — its return to your natal position is a major life milestone.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">♅</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Uranus</div>
+          <div class="planet-governs">Revolution &amp; liberation</div>
+        </div>
+        <div class="planet-desc">The planet of sudden change, originality, and collective awakening. Uranus disrupts in order to liberate. It spends about 7 years in each sign, so its house placement is more personal than its sign. Where Uranus sits, you cannot be conventional — your individuality insists on expression.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">♆</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Neptune</div>
+          <div class="planet-governs">Dreams &amp; dissolution</div>
+        </div>
+        <div class="planet-desc">The planet of spirituality, imagination, and the dissolution of boundaries. Neptune governs mysticism, creative vision, and illusion. It blurs edges — sometimes toward transcendence, sometimes toward confusion. Its house shows where you seek the infinite and must discern vision from escapism.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">♇</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Pluto</div>
+          <div class="planet-governs">Transformation &amp; power</div>
+        </div>
+        <div class="planet-desc">The planet of deep transformation, power, and regeneration. Pluto governs death and rebirth — not always literally, but the endings that make way for entirely new chapters. It operates slowly and profoundly, spending 12–30 years in each sign, shaping generational themes.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">⚷</div>
+        <div class="planet-name-col">
+          <div class="planet-name">Chiron</div>
+          <div class="planet-governs">The wound &amp; the healer</div>
+        </div>
+        <div class="planet-desc">A comet-asteroid that shows your deepest wound — and your greatest gift. The wound Chiron describes often never fully closes, but it becomes the source of profound capacity to heal others. Where Chiron sits is where you hurt, and where you ultimately learn to tend that hurt in others.</div>
+      </div>
+      <div class="planet-row">
+        <div class="planet-sym">☊</div>
+        <div class="planet-name-col">
+          <div class="planet-name">North Node</div>
+          <div class="planet-governs">Soul's direction</div>
+        </div>
+        <div class="planet-desc">Not a planet but a mathematical point — the North Node (with its counterpart, the South Node) marks the axis of your soul's journey. The South Node is what you know innately; the North Node is the unfamiliar territory your soul is being called to grow toward in this lifetime.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider" />
+
+<!-- HOUSES -->
+<div class="section-wrap">
+  <div id="houses" class="content-section">
+    <p class="section-label">The stage</p>
+    <h2 class="section-title">The 12 houses</h2>
+    <p class="section-intro">The chart wheel is divided into 12 houses, each governing a different area of life. Think of the planets as the actors, the signs as their costumes, and the houses as the stage — the specific scenes where the action plays out. The cusp of each house (its starting degree) is shaped by your birth time and location.</p>
+
+    <div class="house-list">
+      <div class="house-row">
+        <div class="house-num-badge">1</div>
+        <div class="house-name-col">
+          <div class="house-theme">Self &amp; first impressions</div>
+          <div class="house-domain">Identity · body · appearance</div>
+        </div>
+        <div class="house-desc">The 1st house is the self as it enters the world. Its cusp is your Ascendant (Rising sign) — the most personal point in the chart, shaped by the exact time of your birth. It describes how you come across to others, your physical presence, and the instinctive identity you project before anyone gets to know you.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">2</div>
+        <div class="house-name-col">
+          <div class="house-theme">Resources &amp; self-worth</div>
+          <div class="house-domain">Money · possessions · values</div>
+        </div>
+        <div class="house-desc">The 2nd house governs everything you own and everything you consider yours — including your sense of your own worth. Material security, income, physical possessions, and the deeper question of what you truly value. Planets here shape your relationship with money and self-esteem.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">3</div>
+        <div class="house-name-col">
+          <div class="house-theme">Communication &amp; local world</div>
+          <div class="house-domain">Mind · siblings · writing · short travel</div>
+        </div>
+        <div class="house-desc">Your immediate environment and how you move through it. The 3rd house covers the way you communicate and think, your relationship with siblings and neighbours, your early education, writing, and daily movement. It is the mind in its immediate, practical expression.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">4</div>
+        <div class="house-name-col">
+          <div class="house-theme">Home &amp; roots</div>
+          <div class="house-domain">Family · ancestry · private self</div>
+        </div>
+        <div class="house-desc">The foundation of everything. The 4th house governs home, family of origin, ancestral roots, and your deepest private inner world. Its cusp is the IC (Imum Coeli) — the most hidden point in the chart. It shows where you come from, and what you build your life upon.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">5</div>
+        <div class="house-name-col">
+          <div class="house-theme">Creativity &amp; joy</div>
+          <div class="house-domain">Play · romance · children · self-expression</div>
+        </div>
+        <div class="house-desc">Life as art and play. The 5th house governs creative self-expression, romance (the heady, early-stage kind), children, and anything you do for the pure joy of it. Where you shine simply because you can. Planets here shape how you create, perform, love, and play.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">6</div>
+        <div class="house-name-col">
+          <div class="house-theme">Health &amp; daily service</div>
+          <div class="house-domain">Routines · body · work · healing</div>
+        </div>
+        <div class="house-desc">The daily practice of being alive. The 6th house governs routines, physical health, the work you do day-to-day (as distinct from your vocation), and acts of service. It is the house of devotion in the small — how you show up consistently, tend your body, and offer your skills.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">7</div>
+        <div class="house-name-col">
+          <div class="house-theme">Partnership</div>
+          <div class="house-domain">Marriage · contracts · one-to-one relationships</div>
+        </div>
+        <div class="house-desc">The mirror — what you seek in others and what you project onto them. The 7th house governs committed partnerships (romantic and business), contracts, and the qualities you both attract and struggle with in close one-to-one relationships. Its cusp is the Descendant, directly opposite your Ascendant.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">8</div>
+        <div class="house-name-col">
+          <div class="house-theme">Transformation &amp; depth</div>
+          <div class="house-domain">Shared resources · death · intimacy · power</div>
+        </div>
+        <div class="house-desc">The house of what we share — bodies, finances, power, and grief. The 8th house governs deep intimacy, joint resources (inheritance, loans, a partner's money), and transformation through loss. Death, here, is both literal and metaphorical — the endings that forge new beginnings.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">9</div>
+        <div class="house-name-col">
+          <div class="house-theme">Meaning &amp; expansion</div>
+          <div class="house-domain">Philosophy · travel · higher learning · publishing</div>
+        </div>
+        <div class="house-desc">The house that reaches beyond the known. The 9th governs long-distance travel, universities, religion, philosophy, publishing, and the search for meaning. Where the 3rd house covers facts, the 9th seeks wisdom. It is the natural home of Jupiter — the house of the big picture.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">10</div>
+        <div class="house-name-col">
+          <div class="house-theme">Vocation &amp; public self</div>
+          <div class="house-domain">Career · reputation · legacy · public role</div>
+        </div>
+        <div class="house-desc">The most visible point in the chart. The 10th house cusp is the Midheaven (MC) — what you are known for, your public role, and the legacy you build. Career lives here, but so does reputation and how you are seen by the wider world. It shows what you are here to contribute publicly.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">11</div>
+        <div class="house-name-col">
+          <div class="house-theme">Community &amp; vision</div>
+          <div class="house-domain">Friends · groups · collective hopes · social change</div>
+        </div>
+        <div class="house-desc">Where individual vision meets collective purpose. The 11th house governs friendships, communities, causes, and the hopes you hold for the future — not just your own, but humanity's. It is the house of social belonging, the people who truly see you, and your dreams for a better world.</div>
+      </div>
+      <div class="house-row">
+        <div class="house-num-badge">12</div>
+        <div class="house-name-col">
+          <div class="house-theme">The hidden realm</div>
+          <div class="house-domain">Unconscious · solitude · spiritual depth</div>
+        </div>
+        <div class="house-desc">The interior world — dreams, the unconscious, retreat, and hidden strength. The 12th house holds what is concealed, what operates beneath the surface, and what must be integrated for wholeness. Planets here can be difficult to access consciously, but carry profound depth. A stellium here means much of the power runs underground.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider" />
+
+<!-- SIGNS -->
+<div class="section-wrap">
+  <div id="signs" class="content-section">
+    <p class="section-label">The tone</p>
+    <h2 class="section-title">The 12 zodiac signs</h2>
+    <p class="section-intro">Signs describe the quality and flavour of energy — the <em>how</em>, not the what. A planet in Scorpio operates very differently to the same planet in Gemini, even if it sits in the same house. Each sign belongs to one of four elements and one of three modes.</p>
+
+    <div class="sign-grid">
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♈</span><span class="sign-name">Aries</span></div>
+        <div class="sign-dates">21 March – 19 April</div>
+        <div class="sign-meta">Fire · Cardinal · Ruled by Mars</div>
+        <div class="sign-kw">Initiative, courage, impulse, pioneering spirit. Aries leads with instinct and burns bright. The first sign — the spark that sets everything in motion.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♉</span><span class="sign-name">Taurus</span></div>
+        <div class="sign-dates">20 April – 20 May</div>
+        <div class="sign-meta">Earth · Fixed · Ruled by Venus</div>
+        <div class="sign-kw">Stability, sensuality, loyalty, patience. Taurus builds slowly and keeps what it builds. Finds the sacred in the physical — food, land, touch, and beauty.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♊</span><span class="sign-name">Gemini</span></div>
+        <div class="sign-dates">21 May – 20 June</div>
+        <div class="sign-meta">Air · Mutable · Ruled by Mercury</div>
+        <div class="sign-kw">Curiosity, duality, adaptability, connection. Gemini gathers threads from everywhere and weaves them into conversation. The mind in motion — quick, versatile, a natural bridge-builder.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♋</span><span class="sign-name">Cancer</span></div>
+        <div class="sign-dates">21 June – 22 July</div>
+        <div class="sign-meta">Water · Cardinal · Ruled by the Moon</div>
+        <div class="sign-kw">Nurture, memory, intuition, protection. Cancer navigates by emotional intelligence and creates belonging for others. The shell is not withdrawal — it's armour for a tender heart.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♌</span><span class="sign-name">Leo</span></div>
+        <div class="sign-dates">23 July – 22 August</div>
+        <div class="sign-meta">Fire · Fixed · Ruled by the Sun</div>
+        <div class="sign-kw">Creativity, generosity, radiance, leadership. Leo shines from the heart — not for ego's sake, but because it has something genuine to give. Fixed fire: steady, warm, devoted.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♍</span><span class="sign-name">Virgo</span></div>
+        <div class="sign-dates">23 August – 22 September</div>
+        <div class="sign-meta">Earth · Mutable · Ruled by Mercury</div>
+        <div class="sign-kw">Discernment, service, analysis, refinement. Virgo notices what others miss. Detail-oriented and devoted to improvement, often in service to something larger than itself.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♎</span><span class="sign-name">Libra</span></div>
+        <div class="sign-dates">23 September – 22 October</div>
+        <div class="sign-meta">Air · Cardinal · Ruled by Venus</div>
+        <div class="sign-kw">Balance, beauty, justice, relationship. Libra seeks equilibrium in all things. A natural diplomat with an instinct for fairness — sometimes to the point of losing its own position.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♏</span><span class="sign-name">Scorpio</span></div>
+        <div class="sign-dates">23 October – 21 November</div>
+        <div class="sign-meta">Water · Fixed · Ruled by Pluto &amp; Mars</div>
+        <div class="sign-kw">Depth, transformation, truth, regeneration. Scorpio moves beneath the surface. It is drawn to what is hidden, taboo, or deeply true — transformation is its native language.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♐</span><span class="sign-name">Sagittarius</span></div>
+        <div class="sign-dates">22 November – 21 December</div>
+        <div class="sign-meta">Fire · Mutable · Ruled by Jupiter</div>
+        <div class="sign-kw">Freedom, philosophy, expansion, truth-seeking. Sagittarius aims toward the horizon, hungry for meaning. Restless and optimistic — it can expand so fast it loses its roots.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♑</span><span class="sign-name">Capricorn</span></div>
+        <div class="sign-dates">22 December – 19 January</div>
+        <div class="sign-meta">Earth · Cardinal · Ruled by Saturn</div>
+        <div class="sign-kw">Ambition, discipline, legacy, endurance. Capricorn builds for the long term. It knows real things take time. The elder archetype — authority earned through sustained effort.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♒</span><span class="sign-name">Aquarius</span></div>
+        <div class="sign-dates">20 January – 18 February</div>
+        <div class="sign-meta">Air · Fixed · Ruled by Uranus &amp; Saturn</div>
+        <div class="sign-kw">Innovation, vision, collective, originality. Aquarius sees patterns in systems and imagines better ones. Oriented toward the future and the collective — sometimes at the cost of the immediate.</div>
+      </div>
+      <div class="sign-card">
+        <div class="sign-top"><span class="sign-sym">♓</span><span class="sign-name">Pisces</span></div>
+        <div class="sign-dates">19 February – 20 March</div>
+        <div class="sign-meta">Water · Mutable · Ruled by Neptune &amp; Jupiter</div>
+        <div class="sign-kw">Compassion, mysticism, surrender, transcendence. Pisces lives at the edges of the visible world. Deeply empathic — it can absorb others' pain as easily as their joy.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider" />
+
+<!-- ELEMENTS & MODES -->
+<div class="section-wrap">
+  <div id="elements" class="content-section">
+    <p class="section-label">The nature of signs</p>
+    <h2 class="section-title">Elements &amp; modes</h2>
+    <p class="section-intro">Every sign is a combination of an <strong>element</strong> — which describes the kind of energy it carries — and a <strong>mode</strong>, which describes how it moves through the world. Together they create twelve distinct combinations.</p>
+
+    <div class="elements-grid">
+      <div class="elem-card fire">
+        <div class="elem-top">
+          <span class="elem-sym">🔥</span>
+          <span class="elem-name">Fire — spirit &amp; will</span>
+        </div>
+        <div class="elem-signs">Aries · Leo · Sagittarius</div>
+        <div class="elem-desc">Fire signs are animated by inspiration, vision, and the drive to create or lead. They move on instinct, need freedom to breathe, and carry an innate belief that things can be better. Naturally enthusiastic and warming — their shadow is burnout, recklessness, and difficulty with sustained effort.</div>
+      </div>
+      <div class="elem-card earth">
+        <div class="elem-top">
+          <span class="elem-sym">🌿</span>
+          <span class="elem-name">Earth — matter &amp; form</span>
+        </div>
+        <div class="elem-signs">Taurus · Virgo · Capricorn</div>
+        <div class="elem-desc">Earth signs work in the realm of the physical — body, money, land, and craft. They build what lasts and find meaning in tangible results. Grounding and reliable — their shadow is rigidity and over-identification with material security at the expense of growth.</div>
+      </div>
+      <div class="elem-card air">
+        <div class="elem-top">
+          <span class="elem-sym">🌬</span>
+          <span class="elem-name">Air — mind &amp; connection</span>
+        </div>
+        <div class="elem-signs">Gemini · Libra · Aquarius</div>
+        <div class="elem-desc">Air signs live in the realm of ideas, language, and relationship. They thrive on exchange, synthesis, and seeing things from multiple angles. Naturally social and conceptual — their shadow is detachment, living in the head at the expense of the heart and body.</div>
+      </div>
+      <div class="elem-card water">
+        <div class="elem-top">
+          <span class="elem-sym">🌊</span>
+          <span class="elem-name">Water — soul &amp; feeling</span>
+        </div>
+        <div class="elem-signs">Cancer · Scorpio · Pisces</div>
+        <div class="elem-desc">Water signs navigate by feeling, intuition, and emotional depth. They absorb the atmosphere of a room and process life through the body and imagination. Deeply empathic — their shadow is over-absorbing others' pain and losing themselves in close relationships.</div>
+      </div>
+    </div>
+
+    <h3 class="modes-title">The three modes</h3>
+    <div class="modes-grid">
+      <div class="mode-card">
+        <div class="mode-name">Cardinal — initiates</div>
+        <div class="mode-signs">Aries · Cancer · Libra · Capricorn</div>
+        <div class="mode-desc">Cardinal signs begin things. They carry the energy of a season's start and are driven to launch, lead, and set things in motion. Strong in initiation — can struggle with follow-through once the initial spark fades.</div>
+      </div>
+      <div class="mode-card">
+        <div class="mode-name">Fixed — sustains</div>
+        <div class="mode-signs">Taurus · Leo · Scorpio · Aquarius</div>
+        <div class="mode-desc">Fixed signs hold the heart of a season. Determined, loyal, and built for endurance — they commit deeply and keep going. Their gift is reliability and depth; their shadow is stubbornness and resistance to necessary change.</div>
+      </div>
+      <div class="mode-card">
+        <div class="mode-name">Mutable — adapts</div>
+        <div class="mode-signs">Gemini · Virgo · Sagittarius · Pisces</div>
+        <div class="mode-desc">Mutable signs close a season and prepare for the next. Flexible, synthesising, and comfortable with change and complexity. Their gift is adaptability and versatility; their challenge is finding solid ground and finishing what they start.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div><!-- /body-101 -->
+
+<!-- 102 TOGGLE -->
+<button class="accordion-toggle" aria-expanded="false" onclick="toggleSection(this,'body-102')">
+  <div class="accordion-toggle-left">
+    <span class="accordion-pill pill-102">102</span>
+    <div>
+      <div class="accordion-title">Build your own chart</div>
+      <div class="accordion-sub">Step 1: Get your natal chart · Step 2: Build your profile</div>
+    </div>
+  </div>
+  <div class="accordion-arrow">▾</div>
+</button>
+<div id="body-102" class="accordion-body">
+
+<!-- STEP 1: GET YOUR CHART -->
+<div class="wb-step-header" style="border-top:none">
+  <div class="wb-step-num">Step one</div>
+  <h3 class="wb-step-title">Get your natal chart</h3>
+  <p class="wb-step-desc">Go to <a href="https://horoscopes.astro-seek.com/birth-chart-horoscope-online" target="_blank" style="color:var(--teal);font-weight:500">astro-seek.com</a> and enter your birth date, birth time, and place of birth. You'll get a chart like the one below. Here's what to look at — and what to ignore for now.</p>
+</div>
+
+<div class="worksheet-wrap" style="padding-top:1.5rem;padding-bottom:2rem">
+  <p style="font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--hero);margin-bottom:1.25rem">What you need vs what to ignore</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem">
+
+    <div style="background:var(--teal-light);border-radius:14px;padding:1.5rem;border-left:4px solid var(--teal)">
+      <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.75rem">✓ Focus on this</div>
+      <div style="display:flex;flex-direction:column;gap:0.6rem">
+        <div style="font-size:0.88rem;color:var(--teal-dark);line-height:1.6"><strong>The table below the wheel</strong> — this lists every planet with its sign, degree, and house number. This is all you need for the worksheet.</div>
+        <div style="font-size:0.88rem;color:var(--teal-dark);line-height:1.6"><strong>The ASC row</strong> — your Rising sign. One of your Big Three.</div>
+        <div style="font-size:0.88rem;color:var(--teal-dark);line-height:1.6"><strong>The MC row</strong> — your Midheaven. Your public role and direction.</div>
+        <div style="font-size:0.88rem;color:var(--teal-dark);line-height:1.6"><strong>Rx next to a planet</strong> — means it was retrograde at birth. Worth noting, but don't overthink it yet.</div>
+      </div>
+    </div>
+
+    <div style="background:var(--coral-light);border-radius:14px;padding:1.5rem;border-left:4px solid var(--hero)">
+      <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--hero-dark);margin-bottom:0.75rem">→ Ignore for now</div>
+      <div style="display:flex;flex-direction:column;gap:0.6rem">
+        <div style="font-size:0.88rem;color:var(--hero-dark);line-height:1.6"><strong>The lines across the centre</strong> — those are aspects. Covered in 103.</div>
+        <div style="font-size:0.88rem;color:var(--hero-dark);line-height:1.6"><strong>Lilith, Fortune, Vertex</strong> — extra points that appear in the table. Skip these rows for now.</div>
+        <div style="font-size:0.88rem;color:var(--hero-dark);line-height:1.6"><strong>The degree strip at the bottom</strong> — the row of numbers along the very bottom of the chart. Not needed yet.</div>
+        <div style="font-size:0.88rem;color:var(--hero-dark);line-height:1.6"><strong>The element/mode grid</strong> (top right of the chart) — interesting later, not essential now.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--hero);margin-bottom:1rem">How to read each row in the table</p>
+  <div style="display:flex;flex-direction:column;border:1px solid var(--light-grey);border-radius:12px;overflow:hidden">
+    <div style="display:grid;grid-template-columns:150px 120px 1fr;background:var(--teal-dark);padding:0.7rem 1rem;gap:1rem">
+      <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5)">Column</div>
+      <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5)">Example</div>
+      <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5)">What it means</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 120px 1fr;padding:0.85rem 1rem;gap:1rem;border-top:1px solid var(--light-grey);align-items:start">
+      <div style="font-size:0.88rem;font-weight:500;color:var(--charcoal)">Planet name</div>
+      <div style="font-size:0.88rem;color:var(--amber);font-family:'Playfair Display',serif">☉ Sun</div>
+      <div style="font-size:0.85rem;color:var(--mid-grey);line-height:1.6">The planet. Rows run Sun → Moon → Mercury → Venus → Mars → Jupiter → Saturn → Uranus → Neptune → Pluto → Node → Lilith → Chiron → ASC → MC.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 120px 1fr;padding:0.85rem 1rem;gap:1rem;border-top:1px solid var(--light-grey);background:#fdf9f5;align-items:start">
+      <div style="font-size:0.88rem;font-weight:500;color:var(--charcoal)">Degree &amp; sign</div>
+      <div style="font-size:0.88rem;color:var(--amber);font-family:'Playfair Display',serif">21° ♏ 33'</div>
+      <div style="font-size:0.85rem;color:var(--mid-grey);line-height:1.6">The degree within the sign, then the sign symbol, then the minutes. <strong>For your worksheet you just need the degree number and the sign name</strong> — e.g. "21° Scorpio". Minutes are extra detail.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 120px 1fr;padding:0.85rem 1rem;gap:1rem;border-top:1px solid var(--light-grey);align-items:start">
+      <div style="font-size:0.88rem;font-weight:500;color:var(--charcoal)">House number</div>
+      <div style="font-size:0.88rem;color:var(--amber);font-family:'Playfair Display',serif">12</div>
+      <div style="font-size:0.85rem;color:var(--mid-grey);line-height:1.6">Which of the 12 houses the planet sits in. This goes straight into the "house" column of your worksheet.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:150px 120px 1fr;padding:0.85rem 1rem;gap:1rem;border-top:1px solid var(--light-grey);background:#fdf9f5;align-items:start">
+      <div style="font-size:0.88rem;font-weight:500;color:var(--charcoal)">Rx</div>
+      <div style="font-size:0.88rem;color:var(--amber);font-family:'Playfair Display',serif">℞</div>
+      <div style="font-size:0.85rem;color:var(--mid-grey);line-height:1.6">Retrograde at birth — the planet's energy tends to be more inward or works less straightforwardly. Just note it for now.</div>
+    </div>
+  </div>
+
+  <p style="margin-top:1.5rem;display:inline-flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--teal);background:var(--teal-light);padding:0.5rem 1rem;border-radius:50px"><span>🖨</span> To print the worksheet below: use Ctrl/Cmd + P. Only the 102 workbook will print.</p>
+</div>
+
+
+<!-- STEP 2 -->
+<div class="wb-step-header">
+  <div class="wb-step-num">Step two</div>
+  <h3 class="wb-step-title">Build your profile</h3>
+  <p class="wb-step-desc">Using the table from your Astro-Seek chart, fill in the sign, house, and degree for each planet below. Then write your own sentence about what it means for you. The formula below shows you how.</p>
+</div>
+
+<div class="worksheet-wrap">
+
+  <!-- FORMULA CARD -->
+  <div style="background:var(--teal-dark);border-radius:16px;padding:1.75rem 2rem;margin-bottom:2rem">
+    <p style="font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:1rem">The formula</p>
+    <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.25rem">
+      <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:0.65rem 1.1rem;text-align:center;border:1px solid rgba(255,255,255,0.12)">
+        <div style="font-size:1.3rem;color:var(--amber);margin-bottom:3px">☉</div>
+        <div style="font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45)">Planet</div>
+        <div style="font-size:0.8rem;color:white;margin-top:2px">what</div>
+      </div>
+      <div style="font-size:1.1rem;color:rgba(255,255,255,0.3)">+</div>
+      <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:0.65rem 1.1rem;text-align:center;border:1px solid rgba(255,255,255,0.12)">
+        <div style="font-size:1.3rem;color:var(--amber);margin-bottom:3px">♏</div>
+        <div style="font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45)">Sign</div>
+        <div style="font-size:0.8rem;color:white;margin-top:2px">how</div>
+      </div>
+      <div style="font-size:1.1rem;color:rgba(255,255,255,0.3)">+</div>
+      <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:0.65rem 1.1rem;text-align:center;border:1px solid rgba(255,255,255,0.12)">
+        <div style="font-size:1.3rem;color:var(--amber);margin-bottom:3px">12</div>
+        <div style="font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45)">House</div>
+        <div style="font-size:0.8rem;color:white;margin-top:2px">where</div>
+      </div>
+      <div style="font-size:1.1rem;color:var(--amber);font-weight:500">=</div>
+      <div style="flex:1;min-width:200px;background:rgba(255,255,255,0.06);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;padding:0.75rem 1rem">
+        <div style="font-family:'Playfair Display',serif;font-size:0.92rem;color:white;font-style:italic;line-height:1.65">"My core self (Sun) is intense, deep, and truth-seeking (Scorpio), and it operates largely in private — in the hidden interior realm (12th house)."</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+      <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:0.9rem 1rem">
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);margin-bottom:0.4rem">☽ Moon in Cancer · 8th house</div>
+        <div style="font-size:0.82rem;color:rgba(255,255,255,0.65);line-height:1.6">"My emotional world is nurturing and deeply intuitive, and I process feelings most intensely through intimacy and shared experience."</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:0.9rem 1rem">
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);margin-bottom:0.4rem">♃ Jupiter in Capricorn · 2nd house</div>
+        <div style="font-size:0.82rem;color:rgba(255,255,255,0.65);line-height:1.6">"I expand and grow through disciplined, practical effort, and this shows up most in how I build material security and self-worth."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="big-three-note">
+    <p><strong>Start with the Big Three:</strong> Fill in your Sun, Moon, and Rising (Ascendant) first — these are the most important placements and give you the broad shape of who you are before you go deeper.</p>
+  </div>
+
+  <p style="font-size:0.82rem;color:var(--mid-grey);margin-bottom:1rem;font-style:italic">Not sure what a sign or house means? Open <strong style="font-style:normal">101</strong> above — it's all there.</p>
+  <table class="ws-table">
+    <thead>
+      <tr>
+        <th style="width:175px">Planet</th>
+        <th style="width:125px">Sign</th>
+        <th style="width:85px">House</th>
+        <th style="width:85px">Degree</th>
+        <th>What this means for me</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">☉</span><div><div class="ws-pname">Sun ★</div><div class="ws-pgov">Core self &amp; identity</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. Scorpio" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 12th" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 19°" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My core identity is... expressed through... in the area of..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">☽</span><div><div class="ws-pname">Moon ★</div><div class="ws-pgov">Emotions &amp; inner needs</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. Cancer" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 8th" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 20°" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My emotional world is... I feel most secure when..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">↑</span><div><div class="ws-pname">Ascendant ★</div><div class="ws-pgov">How you meet the world</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. Sagittarius" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="1st" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 13°" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="I come across to others as... my first impression is..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">☿</span><div><div class="ws-pname">Mercury</div><div class="ws-pgov">Mind &amp; communication</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="The way I think and communicate is..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">♀</span><div><div class="ws-pname">Venus</div><div class="ws-pgov">Love, beauty &amp; values</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="How I love and what I value is..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">♂</span><div><div class="ws-pname">Mars</div><div class="ws-pgov">Drive, desire &amp; action</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My drive and how I take action is..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">♃</span><div><div class="ws-pname">Jupiter</div><div class="ws-pgov">Expansion &amp; meaning</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="I expand and find meaning through..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">♄</span><div><div class="ws-pname">Saturn</div><div class="ws-pgov">Structure &amp; mastery</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="Where I face tests and build mastery is..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">♅</span><div><div class="ws-pname">Uranus</div><div class="ws-pgov">Revolution &amp; liberation</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="Uranus moves slowly — your generation shares this sign. Focus on the house: where in my life do I need to break free and innovate?"></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">♆</span><div><div class="ws-pname">Neptune</div><div class="ws-pgov">Dreams &amp; dissolution</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="Neptune moves slowly — your generation shares this sign. Focus on the house: where do I seek meaning, beauty, or escape?"></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">♇</span><div><div class="ws-pname">Pluto</div><div class="ws-pgov">Transformation &amp; power</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="Pluto moves slowly — your generation shares this sign. Focus on the house: where does deep transformation play out in my life?"></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">⚷</span><div><div class="ws-pname">Chiron</div><div class="ws-pgov">The wound &amp; the healer</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My deepest wound — and gift — is..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">☊</span><div><div class="ws-pname">North Node</div><div class="ws-pgov">Soul's direction</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="The direction my soul is growing toward is..."></textarea></td>
+      </tr>
+      <tr>
+        <td><div class="ws-planet-cell"><span class="ws-sym">↑</span><div><div class="ws-pname">Midheaven (MC)</div><div class="ws-pgov">Vocation &amp; public role</div></div></div></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="10th" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
+        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My public role and vocational calling is shaped by..."></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Reflection prompts -->
+  <div style="margin-top:2.5rem">
+    <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--teal-dark);margin-bottom:1rem">Reflection prompts</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div style="background:var(--cream);border-radius:12px;padding:1.25rem">
+        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--hero);margin-bottom:0.5rem">Clusters</div>
+        <p style="font-size:0.88rem;color:var(--mid-grey);line-height:1.7">Which house has the most planets? Which sign appears most often? This is likely a major theme of your chart.</p>
+        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
+        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
+      </div>
+      <div style="background:var(--cream);border-radius:12px;padding:1.25rem">
+        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--hero);margin-bottom:0.5rem">Empty houses</div>
+        <p style="font-size:0.88rem;color:var(--mid-grey);line-height:1.7">Which houses have no planets? What sign sits on each empty cusp? Remember — empty is not absent.</p>
+        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
+        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
+      </div>
+      <div style="background:var(--cream);border-radius:12px;padding:1.25rem">
+        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--hero);margin-bottom:0.5rem">What resonates</div>
+        <p style="font-size:0.88rem;color:var(--mid-grey);line-height:1.7">Which placement feels most true when you read it back? Which one surprised you?</p>
+        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
+        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
+      </div>
+      <div style="background:var(--cream);border-radius:12px;padding:1.25rem">
+        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--hero);margin-bottom:0.5rem">Your Big Three in one sentence</div>
+        <p style="font-size:0.88rem;color:var(--mid-grey);line-height:1.7">Write a single sentence combining your Sun, Moon, and Rising into one portrait of yourself.</p>
+        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
+        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div><!-- /body-102 -->
+<script>
+function toggleSection(btn, bodyId) {
+  const body = document.getElementById(bodyId);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  btn.setAttribute('aria-expanded', String(!isOpen));
+}
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.subnav a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector('.subnav a[href="#' + entry.target.id + '"]');
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-25% 0px -65% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+
+
+<!-- 103 TOGGLE -->
+<button class="accordion-toggle" aria-expanded="false" onclick="toggleSection(this,'body-103')">
+  <div class="accordion-toggle-left">
+    <span class="accordion-pill pill-103">103</span>
+    <div>
+      <div class="accordion-title">Going deeper</div>
+      <div class="accordion-sub">Aspects · Degrees · Transits · Retrogrades · Monthly cycles</div>
+    </div>
+  </div>
+  <div class="accordion-arrow">▾</div>
+</button>
+<div id="body-103" class="accordion-body">
+
+  <div class="workbook-intro" style="padding-bottom:4rem">
+    <div style="background:var(--cream);border-radius:16px;padding:2.5rem;border-left:4px solid var(--amber);max-width:700px">
+      <p style="font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:0.75rem">Coming soon</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--teal-dark);margin-bottom:0.75rem">Astrology 103 — Going deeper</h3>
+      <p style="font-size:0.95rem;color:var(--mid-grey);line-height:1.8;margin-bottom:0.5rem">You've learned the language and built your personal profile. Now it's time to go back to your natal chart and understand the fuller picture — what the relationships between your planets mean, what the exact degrees tell you, and how to use your chart as a living tool month by month.</p>
+      <p style="font-size:0.95rem;color:var(--mid-grey);line-height:1.8;margin-bottom:1.5rem">This section is being built. It will cover:</p>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;gap:1rem;align-items:flex-start">
+          <span style="color:var(--amber);font-size:1rem;flex-shrink:0;margin-top:1px">✦</span>
+          <div>
+            <div style="font-size:0.9rem;font-weight:500;color:var(--charcoal);margin-bottom:3px">The lines in your chart — aspects</div>
+            <div style="font-size:0.85rem;color:var(--mid-grey);line-height:1.65">Now that you know your placements, you can start to read the relationships between them. Those lines crossing the centre of your wheel show which planets are talking to each other — and whether that conversation is easy, tense, or complex. Conjunctions, trines, squares, oppositions, sextiles, and quincunxes explained.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start">
+          <span style="color:var(--amber);font-size:1rem;flex-shrink:0;margin-top:1px">✦</span>
+          <div>
+            <div style="font-size:0.9rem;font-weight:500;color:var(--charcoal);margin-bottom:3px">The fine print — degrees</div>
+            <div style="font-size:0.85rem;color:var(--mid-grey);line-height:1.65">What early, middle, and late degrees mean within a sign. Why 29° (the anaretic degree) carries such intensity — and why it matters when a transiting planet hits that point in your chart.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start">
+          <span style="color:var(--amber);font-size:1rem;flex-shrink:0;margin-top:1px">✦</span>
+          <div>
+            <div style="font-size:0.9rem;font-weight:500;color:var(--charcoal);margin-bottom:3px">The living sky — transits</div>
+            <div style="font-size:0.85rem;color:var(--mid-grey);line-height:1.65">Your natal chart is fixed, but the sky keeps moving. Transits are what happen when today's planets interact with your natal placements — activating different parts of your chart at different times. This is how astrology becomes a tool for understanding what's happening in your life right now.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start">
+          <span style="color:var(--amber);font-size:1rem;flex-shrink:0;margin-top:1px">✦</span>
+          <div>
+            <div style="font-size:0.9rem;font-weight:500;color:var(--charcoal);margin-bottom:3px">Retrogrades</div>
+            <div style="font-size:0.85rem;color:var(--mid-grey);line-height:1.65">What it actually means when a planet goes retrograde — and how to work with the inward-turning energy rather than against it. Mercury Rx, Venus Rx, and the slower planets that mark bigger turning points.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start">
+          <span style="color:var(--amber);font-size:1rem;flex-shrink:0;margin-top:1px">✦</span>
+          <div>
+            <div style="font-size:0.9rem;font-weight:500;color:var(--charcoal);margin-bottom:3px">Living with it month by month — the Moon</div>
+            <div style="font-size:0.85rem;color:var(--mid-grey);line-height:1.65">Working with the lunar cycle as a practical tool. New moons for setting intentions, full moons for releasing, and how the Moon's sign each day colours your emotional weather. The most immediately accessible layer of astrology for everyday life.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /body-103 -->
+
+</div><!-- /accordion -->
+<footer>
+  <p><a href="/">← Back to allynaylor.com</a> &nbsp;·&nbsp; Astrology by <a href="/">Ally Naylor</a></p>
+</footer>
+</body>
+</html>
