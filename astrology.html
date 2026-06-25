@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Astrology — Ally Naylor</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn5CsPC90ZXh0Pgo8L3N2Zz4=" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -214,8 +215,13 @@
     /* ── PART HEADERS ── */
     .part-header {
       background: var(--cream);
-      padding: 3.5rem 3rem 2rem;
-      text-align: center;
+      padding: 3.5rem 0 2rem;
+      border-top: 1px solid var(--light-grey);
+    }
+    .part-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem;
     }
     .part-pill {
       display: inline-block;
@@ -934,13 +940,16 @@
   
     /* ── ACCORDION ── */
     .accordion { border-top: 1px solid var(--light-grey); }
-    .accordion-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:2rem 3rem; border-bottom:1px solid var(--light-grey); text-align:left; transition:background 0.2s; }
-    .accordion-toggle:hover { background:var(--cream); }
+    .accordion-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:2rem 3rem; border-bottom:1px solid var(--light-grey); text-align:left; transition:all 0.2s; border-left:4px solid transparent; }
+    .accordion-toggle:hover { filter:brightness(0.97); }
+    .accordion-toggle.toggle-101 { background:var(--teal-light); border-left-color:var(--teal); }
+    .accordion-toggle.toggle-102 { background:var(--coral-light); border-left-color:var(--hero); }
+    .accordion-toggle.toggle-103 { background:#ede8f5; border-left-color:#9b72cf; }
     .accordion-toggle-left { display:flex; align-items:center; gap:1.25rem; }
     .accordion-pill { display:inline-block; padding:0.3rem 0.9rem; border-radius:50px; font-size:0.75rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; }
-    .pill-101 { background:var(--teal-light); color:var(--teal-dark); }
-    .pill-102 { background:var(--coral-light); color:var(--hero-dark); }
-    .pill-103 { background:#ede8f5; color:#4a357a; }
+    .pill-101 { background:var(--teal-dark); color:white; }
+    .pill-102 { background:var(--hero); color:white; }
+    .pill-103 { background:#6b3fa0; color:white; }
     .accordion-title { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--teal-dark); }
     .accordion-sub { font-size:0.88rem; color:var(--mid-grey); margin-top:0.2rem; }
     .accordion-arrow { width:36px; height:36px; border-radius:50%; border:1px solid var(--light-grey); background:white; display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--teal); transition:transform 0.3s; flex-shrink:0; }
@@ -952,10 +961,12 @@
     .workbook-intro { padding:3rem 3rem 2rem; max-width:1100px; margin:0 auto; }
     .workbook-intro p { font-size:1rem; line-height:1.8; color:var(--mid-grey); max-width:640px; margin-bottom:1rem; }
     .print-tip { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.82rem; color:var(--teal); background:var(--teal-light); padding:0.5rem 1rem; border-radius:50px; }
-    .wb-step-header { background:var(--cream); border-top:1px solid var(--light-grey); padding:2rem 3rem 1.5rem; }
+    .wb-step-header { background:var(--warm-white); border-top:2px solid var(--light-grey); padding:2rem 0 1.5rem; }
+    .wb-step-header > * { max-width:1100px; margin-left:auto; margin-right:auto; padding-left:3rem; padding-right:3rem; }
+    #step-one-header { border-top:none; padding-top:1.5rem; }
     .wb-step-num { font-size:0.72rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--hero); margin-bottom:0.4rem; }
     .wb-step-title { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--teal-dark); margin-bottom:0.5rem; }
-    .wb-step-desc { font-size:0.92rem; color:var(--mid-grey); line-height:1.7; max-width:600px; }
+    .wb-step-desc { font-size:0.92rem; color:var(--mid-grey); line-height:1.7; max-width:560px; }
     .worksheet-wrap { padding:2rem 3rem 3rem; max-width:1100px; margin:0 auto; }
     .ws-table { width:100%; border-collapse:collapse; }
     .ws-table th { font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:white; background:var(--teal-dark); padding:0.75rem 1rem; text-align:left; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
@@ -1027,14 +1038,16 @@
     @media (max-width:768px) { .chart-anatomy { grid-template-columns:1fr; } .col-row { grid-template-columns:1fr; } }
 
     @media print {
-      nav, .page-hero, .accordion-toggle, .subnav, footer, #body-101 { display:none !important; }
+      nav, .page-hero, .accordion-toggle, .subnav, footer,
+      #body-101, #body-103, .workbook-intro, .wb-step-header,
+      .formula-wrap, .big-three-note, .reflection-prompts { display:none !important; }
       .accordion-body { display:block !important; }
       body { background:white; }
-      .wb-step-header { background:none; border:none; padding:1rem 0 0.5rem; }
-      .worksheet-wrap, .wheel-wrap, .ref-wrap, .workbook-intro { padding:0.75rem 0; }
-      .ws-input, .ws-meaning { border-bottom:1px solid #ccc; }
-      svg.blank-wheel { max-width:100%; }
-      .wheel-layout { grid-template-columns:1fr 220px; gap:1.5rem; }
+      .worksheet-wrap { padding:0.5rem 0; }
+      .ws-input { border:none; border-bottom:1px solid #ccc; }
+      .ws-meaning { border:none; border-bottom:1px solid #ccc; }
+      .ws-table th { background:#1e5c5c !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .ws-table tr:nth-child(even) td { background:#f0f8f8 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
       @page { margin:1.5cm; size:A4; }
     }
     @media (max-width:768px) {
@@ -1056,6 +1069,7 @@
     <li><a href="/#work">Work</a></li>
     <li><a href="/#tbi">TBI &amp; Recovery</a></li>
     <li><a href="/#art">Creative</a></li>
+    <li><a href="https://sharedstorycollective.org" target="_blank">SHSA Advocacy</a></li>
     <li><a href="/astrology.html" class="active">Astrology</a></li>
   </ul>
 </nav>
@@ -1077,12 +1091,12 @@
 <div class="accordion">
 
 <!-- 101 TOGGLE -->
-<button class="accordion-toggle" aria-expanded="true" onclick="toggleSection(this,'body-101')">
+<button class="accordion-toggle toggle-101" aria-expanded="true" onclick="toggleSection(this,'body-101')">
   <div class="accordion-toggle-left">
     <span class="accordion-pill pill-101">101</span>
     <div>
       <div class="accordion-title">Understanding the language</div>
-      <div class="accordion-sub">Planets · Houses · Signs · Elements · Natal chart example</div>
+      <div class="accordion-sub">Planets · Houses · Signs · Elements</div>
     </div>
   </div>
   <div class="accordion-arrow">▾</div>
@@ -1096,13 +1110,16 @@
   <a href="#signs">Signs</a>
   <a href="#elements">Elements</a>
 </nav>
+
 <!-- ═══════════════════════════════════════════
      PART ONE: THE COMPONENTS
 ════════════════════════════════════════════ -->
 <div id="part-one" class="part-header">
-  <span class="part-pill one">Part one</span>
-  <h2>The components</h2>
-  <p>Before you can read a chart, you need to understand its building blocks — the planets, houses, signs, and elements that together create the full picture.</p>
+  <div class="part-header-inner">
+    <span class="part-pill one">Part one</span>
+    <h2>The components</h2>
+    <p>Before you can read a chart, you need to understand its building blocks — the planets, houses, signs, and elements that together create the full picture.</p>
+  </div>
 </div>
 
 <!-- PLANETS -->
@@ -1474,12 +1491,27 @@
   </div>
 </div>
 
-
+<div style="background:var(--cream);border-top:1px solid var(--light-grey);padding:2rem 3rem;">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <p style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--teal-dark);margin-bottom:0.3rem">Take it with you</p>
+      <p style="font-size:0.88rem;color:var(--mid-grey)">Download the 101 reference cards as a PDF — one page each for planets, houses, signs, and elements.</p>
+    </div>
+    <a href="/astrology-101-reference.pdf" download
+       style="display:inline-flex;align-items:center;gap:0.6rem;font-size:0.88rem;font-weight:500;
+              padding:0.75rem 1.5rem;border-radius:50px;text-decoration:none;flex-shrink:0;
+              background:var(--teal-dark);color:white;transition:background 0.2s;"
+       onmouseover="this.style.background='var(--teal)'"
+       onmouseout="this.style.background='var(--teal-dark)'">
+      ↓ Download reference guide (PDF)
+    </a>
+  </div>
+</div>
 
 </div><!-- /body-101 -->
 
 <!-- 102 TOGGLE -->
-<button class="accordion-toggle" aria-expanded="false" onclick="toggleSection(this,'body-102')">
+<button class="accordion-toggle toggle-102" aria-expanded="false" onclick="toggleSection(this,'body-102')">
   <div class="accordion-toggle-left">
     <span class="accordion-pill pill-102">102</span>
     <div>
@@ -1492,7 +1524,7 @@
 <div id="body-102" class="accordion-body">
 
 <!-- STEP 1: GET YOUR CHART -->
-<div class="wb-step-header" style="border-top:none">
+<div class="wb-step-header" id="step-one-header">
   <div class="wb-step-num">Step one</div>
   <h3 class="wb-step-title">Get your natal chart</h3>
   <p class="wb-step-desc">Go to <a href="https://horoscopes.astro-seek.com/birth-chart-horoscope-online" target="_blank" style="color:var(--teal);font-weight:500">astro-seek.com</a> and enter your birth date, birth time, and place of birth. You'll get a chart like the one below. Here's what to look at — and what to ignore for now.</p>
@@ -1613,7 +1645,7 @@
     <thead>
       <tr>
         <th style="width:175px">Planet</th>
-        <th style="width:125px">Sign</th>
+        <th style="width:140px">Zodiac sign</th>
         <th style="width:85px">House</th>
         <th style="width:85px">Degree</th>
         <th>What this means for me</th>
@@ -1622,23 +1654,23 @@
     <tbody>
       <tr>
         <td><div class="ws-planet-cell"><span class="ws-sym">☉</span><div><div class="ws-pname">Sun ★</div><div class="ws-pgov">Core self &amp; identity</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. Scorpio" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 12th" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 19°" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Scorpio" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="12th" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="19°" /></td>
         <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My core identity is... expressed through... in the area of..."></textarea></td>
       </tr>
       <tr>
         <td><div class="ws-planet-cell"><span class="ws-sym">☽</span><div><div class="ws-pname">Moon ★</div><div class="ws-pgov">Emotions &amp; inner needs</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. Cancer" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 8th" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 20°" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Cancer" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="8th" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="20°" /></td>
         <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My emotional world is... I feel most secure when..."></textarea></td>
       </tr>
       <tr>
         <td><div class="ws-planet-cell"><span class="ws-sym">↑</span><div><div class="ws-pname">Ascendant ★</div><div class="ws-pgov">How you meet the world</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. Sagittarius" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="Sagittarius" /></td>
         <td class="ws-input-cell"><input class="ws-input" placeholder="1st" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="e.g. 13°" /></td>
+        <td class="ws-input-cell"><input class="ws-input" placeholder="13°" /></td>
         <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="I come across to others as... my first impression is..."></textarea></td>
       </tr>
       <tr>
@@ -1722,6 +1754,7 @@
   </table>
 
   <!-- Reflection prompts -->
+  <div class="reflection-prompts">
   <div style="margin-top:2.5rem">
     <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--teal-dark);margin-bottom:1rem">Reflection prompts</h4>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
@@ -1778,7 +1811,7 @@ sections.forEach(s => observer.observe(s));
 
 
 <!-- 103 TOGGLE -->
-<button class="accordion-toggle" aria-expanded="false" onclick="toggleSection(this,'body-103')">
+<button class="accordion-toggle toggle-103" aria-expanded="false" onclick="toggleSection(this,'body-103')">
   <div class="accordion-toggle-left">
     <span class="accordion-pill pill-103">103</span>
     <div>
