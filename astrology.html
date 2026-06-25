@@ -177,7 +177,7 @@
 
     /* ── SECTION SHARED ── */
     .content-section {
-      padding: 5rem 3rem;
+      padding: 4rem 3rem;
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -216,7 +216,7 @@
     /* ── PART HEADERS ── */
     .part-header {
       background: var(--cream);
-      padding: 3.5rem 0 2rem;
+      padding: 2.5rem 0 2rem;
       border-top: 1px solid var(--light-grey);
     }
     .part-header-inner {
@@ -245,8 +245,8 @@
     .part-header p {
       font-size: 0.95rem;
       color: var(--mid-grey);
-      max-width: 540px;
-      margin: 0 auto;
+      max-width: 600px;
+      margin: 0;
       line-height: 1.7;
     }
 
@@ -941,18 +941,19 @@
   
     /* ── ACCORDION ── */
     .accordion { border-top: 1px solid var(--light-grey); }
-    .accordion-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:2rem 3rem; border-bottom:1px solid var(--light-grey); text-align:left; transition:all 0.2s; border-left:4px solid transparent; }
+    .accordion-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:1.75rem 3rem; border-bottom:1px solid var(--light-grey); text-align:left; transition:all 0.2s; border-left:4px solid transparent; }
     .accordion-toggle:hover { filter:brightness(0.97); }
     .accordion-toggle.toggle-101 { background:var(--teal-light); border-left-color:var(--teal); }
     .accordion-toggle.toggle-102 { background:var(--coral-light); border-left-color:var(--hero); }
     .accordion-toggle.toggle-103 { background:#ede8f5; border-left-color:#9b72cf; }
-    .accordion-toggle-left { display:flex; align-items:center; gap:1.25rem; }
-    .accordion-pill { display:inline-block; padding:0.3rem 0.9rem; border-radius:50px; font-size:0.75rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; }
+    .accordion-toggle-left { display:flex; flex-direction:column; align-items:flex-start; gap:0.4rem; flex:1; }
+    .accordion-toggle-top { display:flex; align-items:center; gap:0.9rem; }
+    .accordion-pill { display:inline-flex; align-items:center; justify-content:center; padding:0.25rem 0.85rem; border-radius:50px; font-size:0.75rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; flex-shrink:0; }
     .pill-101 { background:var(--teal-dark); color:white; }
     .pill-102 { background:var(--hero); color:white; }
     .pill-103 { background:#6b3fa0; color:white; }
-    .accordion-title { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--teal-dark); }
-    .accordion-sub { font-size:0.88rem; color:var(--mid-grey); margin-top:0.2rem; }
+    .accordion-title { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--teal-dark); line-height:1.2; }
+    .accordion-sub { font-size:0.85rem; color:var(--mid-grey); margin-top:0; padding-left:0; }
     .accordion-arrow { width:36px; height:36px; border-radius:50%; border:1px solid var(--light-grey); background:white; display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--teal); transition:transform 0.3s; flex-shrink:0; }
     .accordion-toggle[aria-expanded="true"] .accordion-arrow { transform:rotate(180deg); }
     .accordion-body { display:none; }
@@ -962,9 +963,9 @@
     .workbook-intro { padding:3rem 3rem 2rem; max-width:1100px; margin:0 auto; }
     .workbook-intro p { font-size:1rem; line-height:1.8; color:var(--mid-grey); max-width:640px; margin-bottom:1rem; }
     .print-tip { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.82rem; color:var(--teal); background:var(--teal-light); padding:0.5rem 1rem; border-radius:50px; }
-    .wb-step-header { background:var(--warm-white); border-top:2px solid var(--light-grey); padding:2rem 0 1.5rem; }
-    .wb-step-header > * { max-width:1100px; margin-left:auto; margin-right:auto; padding-left:3rem; padding-right:3rem; }
-    #step-one-header { border-top:none; padding-top:1.5rem; }
+    .wb-step-header { background:var(--warm-white); border-top:2px solid var(--light-grey); padding:2rem 3rem 1.5rem; }
+    .wb-step-header .wb-step-num, .wb-step-header .wb-step-title, .wb-step-header .wb-step-desc { max-width:700px; display:block; }
+    #step-one-header { border-top:none; padding-top:1.5rem; padding-bottom:1.5rem; }
     .wb-step-num { font-size:0.72rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--hero); margin-bottom:0.4rem; }
     .wb-step-title { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--teal-dark); margin-bottom:0.5rem; }
     .wb-step-desc { font-size:0.92rem; color:var(--mid-grey); line-height:1.7; max-width:560px; margin-left:0; }
@@ -1094,11 +1095,11 @@
 <!-- 101 TOGGLE -->
 <button class="accordion-toggle toggle-101" aria-expanded="true" onclick="toggleSection(this,'body-101')">
   <div class="accordion-toggle-left">
-    <span class="accordion-pill pill-101">101</span>
-    <div>
+    <div class="accordion-toggle-top">
+      <span class="accordion-pill pill-101">101</span>
       <div class="accordion-title">Understanding the language</div>
-      <div class="accordion-sub">Planets · Houses · Signs · Elements</div>
     </div>
+    <div class="accordion-sub">Planets · Houses · Signs · Elements</div>
   </div>
   <div class="accordion-arrow">▾</div>
 </button>
@@ -1514,11 +1515,11 @@
 <!-- 102 TOGGLE -->
 <button class="accordion-toggle toggle-102" aria-expanded="false" onclick="toggleSection(this,'body-102')">
   <div class="accordion-toggle-left">
-    <span class="accordion-pill pill-102">102</span>
-    <div>
+    <div class="accordion-toggle-top">
+      <span class="accordion-pill pill-102">102</span>
       <div class="accordion-title">Build your own chart</div>
-      <div class="accordion-sub">Step 1: Get your natal chart · Step 2: Build your profile</div>
     </div>
+    <div class="accordion-sub">Step 1: Get your natal chart · Step 2: Build your profile</div>
   </div>
   <div class="accordion-arrow">▾</div>
 </button>
@@ -1586,7 +1587,6 @@
     </div>
   </div>
 
-  <p style="margin-top:1.5rem;display:inline-flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--teal);background:var(--teal-light);padding:0.5rem 1rem;border-radius:50px"><span>🖨</span> To print the worksheet below: use Ctrl/Cmd + P. Only the 102 workbook will print.</p>
 </div>
 
 
@@ -1682,11 +1682,11 @@ sections.forEach(s => observer.observe(s));
 <!-- 103 TOGGLE -->
 <button class="accordion-toggle toggle-103" aria-expanded="false" onclick="toggleSection(this,'body-103')">
   <div class="accordion-toggle-left">
-    <span class="accordion-pill pill-103">103</span>
-    <div>
+    <div class="accordion-toggle-top">
+      <span class="accordion-pill pill-103">103</span>
       <div class="accordion-title">Going deeper</div>
-      <div class="accordion-sub">Aspects · Degrees · Transits · Retrogrades · Monthly cycles</div>
     </div>
+    <div class="accordion-sub">Aspects · Degrees · Transits · Retrogrades · Monthly cycles</div>
   </div>
   <div class="accordion-arrow">▾</div>
 </button>
