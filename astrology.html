@@ -202,6 +202,7 @@
       color: var(--mid-grey);
       max-width: 640px;
       margin-bottom: 2.5rem;
+      margin-left: 0;
     }
     .section-divider {
       border: none;
@@ -966,7 +967,7 @@
     #step-one-header { border-top:none; padding-top:1.5rem; }
     .wb-step-num { font-size:0.72rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--hero); margin-bottom:0.4rem; }
     .wb-step-title { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--teal-dark); margin-bottom:0.5rem; }
-    .wb-step-desc { font-size:0.92rem; color:var(--mid-grey); line-height:1.7; max-width:560px; }
+    .wb-step-desc { font-size:0.92rem; color:var(--mid-grey); line-height:1.7; max-width:560px; margin-left:0; }
     .worksheet-wrap { padding:2rem 3rem 3rem; max-width:1100px; margin:0 auto; }
     .ws-table { width:100%; border-collapse:collapse; }
     .ws-table th { font-size:0.72rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:white; background:var(--teal-dark); padding:0.75rem 1rem; text-align:left; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
@@ -1593,12 +1594,12 @@
 <div class="wb-step-header">
   <div class="wb-step-num">Step two</div>
   <h3 class="wb-step-title">Build your profile</h3>
-  <p class="wb-step-desc">Using the table from your Astro-Seek chart, fill in the sign, house, and degree for each planet below. Then write your own sentence about what it means for you. The formula below shows you how.</p>
+  <p class="wb-step-desc">Download the worksheet below, open it in Word, and fill in the sign, house, and degree for each planet from your Astro-Seek chart. Then write your own interpretation sentence using the formula: <em>Planet (what) + Sign (how) + House (where)</em>. Refer back to 101 if you need to look up what any planet, sign, or house means.</p>
 </div>
 
 <div class="worksheet-wrap">
 
-  <!-- FORMULA CARD -->
+  <!-- Formula card -->
   <div style="background:var(--teal-dark);border-radius:16px;padding:1.75rem 2rem;margin-bottom:2rem">
     <p style="font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:1rem">The formula</p>
     <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.25rem">
@@ -1636,156 +1637,24 @@
     </div>
   </div>
 
-  <div class="big-three-note">
-    <p><strong>Start with the Big Three:</strong> Fill in your Sun, Moon, and Rising (Ascendant) first — these are the most important placements and give you the broad shape of who you are before you go deeper.</p>
-  </div>
-
-  <p style="font-size:0.82rem;color:var(--mid-grey);margin-bottom:1rem;font-style:italic">Not sure what a sign or house means? Open <strong style="font-style:normal">101</strong> above — it's all there.</p>
-  <table class="ws-table">
-    <thead>
-      <tr>
-        <th style="width:175px">Planet</th>
-        <th style="width:140px">Zodiac sign</th>
-        <th style="width:85px">House</th>
-        <th style="width:85px">Degree</th>
-        <th>What this means for me</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">☉</span><div><div class="ws-pname">Sun ★</div><div class="ws-pgov">Core self &amp; identity</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Scorpio" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="12th" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="19°" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My core identity is... expressed through... in the area of..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">☽</span><div><div class="ws-pname">Moon ★</div><div class="ws-pgov">Emotions &amp; inner needs</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Cancer" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="8th" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="20°" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My emotional world is... I feel most secure when..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">↑</span><div><div class="ws-pname">Ascendant ★</div><div class="ws-pgov">How you meet the world</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sagittarius" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="1st" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="13°" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="I come across to others as... my first impression is..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">☿</span><div><div class="ws-pname">Mercury</div><div class="ws-pgov">Mind &amp; communication</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="The way I think and communicate is..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">♀</span><div><div class="ws-pname">Venus</div><div class="ws-pgov">Love, beauty &amp; values</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="How I love and what I value is..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">♂</span><div><div class="ws-pname">Mars</div><div class="ws-pgov">Drive, desire &amp; action</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My drive and how I take action is..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">♃</span><div><div class="ws-pname">Jupiter</div><div class="ws-pgov">Expansion &amp; meaning</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="I expand and find meaning through..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">♄</span><div><div class="ws-pname">Saturn</div><div class="ws-pgov">Structure &amp; mastery</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="Where I face tests and build mastery is..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">♅</span><div><div class="ws-pname">Uranus</div><div class="ws-pgov">Revolution &amp; liberation</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="Uranus moves slowly — your generation shares this sign. Focus on the house: where in my life do I need to break free and innovate?"></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">♆</span><div><div class="ws-pname">Neptune</div><div class="ws-pgov">Dreams &amp; dissolution</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="Neptune moves slowly — your generation shares this sign. Focus on the house: where do I seek meaning, beauty, or escape?"></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">♇</span><div><div class="ws-pname">Pluto</div><div class="ws-pgov">Transformation &amp; power</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="Pluto moves slowly — your generation shares this sign. Focus on the house: where does deep transformation play out in my life?"></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">⚷</span><div><div class="ws-pname">Chiron</div><div class="ws-pgov">The wound &amp; the healer</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My deepest wound — and gift — is..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">☊</span><div><div class="ws-pname">North Node</div><div class="ws-pgov">Soul's direction</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="House" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="The direction my soul is growing toward is..."></textarea></td>
-      </tr>
-      <tr>
-        <td><div class="ws-planet-cell"><span class="ws-sym">↑</span><div><div class="ws-pname">Midheaven (MC)</div><div class="ws-pgov">Vocation &amp; public role</div></div></div></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Sign" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="10th" /></td>
-        <td class="ws-input-cell"><input class="ws-input" placeholder="Degree" /></td>
-        <td class="ws-meaning-cell"><textarea class="ws-meaning" placeholder="My public role and vocational calling is shaped by..."></textarea></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Reflection prompts -->
-  <div class="reflection-prompts">
-  <div style="margin-top:2.5rem">
-    <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--teal-dark);margin-bottom:1rem">Reflection prompts</h4>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-      <div style="background:var(--cream);border-radius:12px;padding:1.25rem">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--hero);margin-bottom:0.5rem">Clusters</div>
-        <p style="font-size:0.88rem;color:var(--mid-grey);line-height:1.7">Which house has the most planets? Which sign appears most often? This is likely a major theme of your chart.</p>
-        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
-        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
-      </div>
-      <div style="background:var(--cream);border-radius:12px;padding:1.25rem">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--hero);margin-bottom:0.5rem">Empty houses</div>
-        <p style="font-size:0.88rem;color:var(--mid-grey);line-height:1.7">Which houses have no planets? What sign sits on each empty cusp? Remember — empty is not absent.</p>
-        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
-        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
-      </div>
-      <div style="background:var(--cream);border-radius:12px;padding:1.25rem">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--hero);margin-bottom:0.5rem">What resonates</div>
-        <p style="font-size:0.88rem;color:var(--mid-grey);line-height:1.7">Which placement feels most true when you read it back? Which one surprised you?</p>
-        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
-        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
-      </div>
-      <div style="background:var(--cream);border-radius:12px;padding:1.25rem">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--hero);margin-bottom:0.5rem">Your Big Three in one sentence</div>
-        <p style="font-size:0.88rem;color:var(--mid-grey);line-height:1.7">Write a single sentence combining your Sun, Moon, and Rising into one portrait of yourself.</p>
-        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
-        <div style="margin-top:0.75rem;border-bottom:1px solid var(--light-grey);padding-bottom:1.5rem"></div>
-      </div>
+  <!-- Download card -->
+  <div style="background:var(--cream);border-radius:16px;padding:2rem 2.5rem;border:1px solid var(--light-grey);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+    <div>
+      <p style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--teal-dark);margin-bottom:0.4rem">Your personal worksheet</p>
+      <p style="font-size:0.9rem;color:var(--mid-grey);line-height:1.7;max-width:480px">A Word document with every planet, space to fill in your sign, house, and degree, and room to write your own interpretation. Plus reflection prompts at the end.</p>
+      <p style="font-size:0.82rem;color:var(--mid-grey);margin-top:0.5rem;font-style:italic">Opens in Microsoft Word or Google Docs. Fill in on your computer, or print and fill in by hand.</p>
     </div>
+    <a href="/astrology-102-worksheet.docx" download
+       style="display:inline-flex;align-items:center;gap:0.6rem;font-size:0.9rem;font-weight:500;
+              padding:0.85rem 1.75rem;border-radius:50px;text-decoration:none;flex-shrink:0;
+              background:var(--hero);color:white;transition:background 0.2s;"
+       onmouseover="this.style.background='var(--hero-dark)'"
+       onmouseout="this.style.background='var(--hero)'">
+      ↓ Download worksheet (Word)
+    </a>
   </div>
-</div>
 
+</div>
 
 </div><!-- /body-102 -->
 <script>
