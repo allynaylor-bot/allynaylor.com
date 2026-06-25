@@ -216,13 +216,12 @@
     /* ── PART HEADERS ── */
     .part-header {
       background: var(--cream);
-      padding: 2.5rem 0 2rem;
       border-top: 1px solid var(--light-grey);
     }
     .part-header-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 3rem;
+      padding: 2.5rem 3rem 2rem;
     }
     .part-pill {
       display: inline-block;
@@ -941,20 +940,21 @@
   
     /* ── ACCORDION ── */
     .accordion { border-top: 1px solid var(--light-grey); }
-    .accordion-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:1.75rem 3rem; border-bottom:1px solid var(--light-grey); text-align:left; transition:all 0.2s; border-left:4px solid transparent; }
+    .accordion-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.75rem 3rem 1.25rem; border-bottom:1px solid var(--light-grey); text-align:center; transition:all 0.2s; border-left:4px solid transparent; gap:0; }
     .accordion-toggle:hover { filter:brightness(0.97); }
     .accordion-toggle.toggle-101 { background:var(--teal-light); border-left-color:var(--teal); }
     .accordion-toggle.toggle-102 { background:var(--coral-light); border-left-color:var(--hero); }
     .accordion-toggle.toggle-103 { background:#ede8f5; border-left-color:#9b72cf; }
-    .accordion-toggle-left { display:flex; flex-direction:column; align-items:flex-start; gap:0.4rem; flex:1; }
-    .accordion-toggle-top { display:flex; align-items:center; gap:0.9rem; }
+    .accordion-toggle-inner { display:flex; flex-direction:column; align-items:center; gap:0.35rem; width:100%; max-width:1100px; }
+    .accordion-toggle-left { display:contents; }
+    .accordion-toggle-top { display:contents; }
     .accordion-pill { display:inline-flex; align-items:center; justify-content:center; padding:0.25rem 0.85rem; border-radius:50px; font-size:0.75rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; flex-shrink:0; }
     .pill-101 { background:var(--teal-dark); color:white; }
     .pill-102 { background:var(--hero); color:white; }
     .pill-103 { background:#6b3fa0; color:white; }
     .accordion-title { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--teal-dark); line-height:1.2; }
-    .accordion-sub { font-size:0.85rem; color:var(--mid-grey); margin-top:0; padding-left:0; }
-    .accordion-arrow { width:36px; height:36px; border-radius:50%; border:1px solid var(--light-grey); background:white; display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--teal); transition:transform 0.3s; flex-shrink:0; }
+    .accordion-sub { font-size:0.85rem; color:var(--mid-grey); text-align:center; margin-bottom:0.75rem; }
+    .accordion-arrow { width:32px; height:32px; border-radius:50%; border:1px solid var(--light-grey); background:white; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:var(--teal); transition:transform 0.3s; }
     .accordion-toggle[aria-expanded="true"] .accordion-arrow { transform:rotate(180deg); }
     .accordion-body { display:none; }
     .accordion-body.open { display:block; }
@@ -963,9 +963,11 @@
     .workbook-intro { padding:3rem 3rem 2rem; max-width:1100px; margin:0 auto; }
     .workbook-intro p { font-size:1rem; line-height:1.8; color:var(--mid-grey); max-width:640px; margin-bottom:1rem; }
     .print-tip { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.82rem; color:var(--teal); background:var(--teal-light); padding:0.5rem 1rem; border-radius:50px; }
-    .wb-step-header { background:var(--warm-white); border-top:2px solid var(--light-grey); padding:2rem 3rem 1.5rem; }
-    .wb-step-header .wb-step-num, .wb-step-header .wb-step-title, .wb-step-header .wb-step-desc { max-width:700px; display:block; }
-    #step-one-header { border-top:none; padding-top:1.5rem; padding-bottom:1.5rem; }
+    .wb-step-header { background:var(--warm-white); border-top:2px solid var(--light-grey); padding:2rem 3rem 1.5rem; max-width:1100px; margin:0 auto; width:100%; box-sizing:border-box; }
+    .wb-step-header-outer { background:var(--warm-white); border-top:2px solid var(--light-grey); }
+    .wb-step-num { font-size:0.72rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--hero); margin-bottom:0.4rem; }
+    .wb-step-title { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--teal-dark); margin-bottom:0.5rem; }
+    .wb-step-desc { font-size:0.92rem; color:var(--mid-grey); line-height:1.7; max-width:560px; margin-left:0; }
     .wb-step-num { font-size:0.72rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--hero); margin-bottom:0.4rem; }
     .wb-step-title { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--teal-dark); margin-bottom:0.5rem; }
     .wb-step-desc { font-size:0.92rem; color:var(--mid-grey); line-height:1.7; max-width:560px; margin-left:0; }
@@ -1094,14 +1096,12 @@
 
 <!-- 101 TOGGLE -->
 <button class="accordion-toggle toggle-101" aria-expanded="true" onclick="toggleSection(this,'body-101')">
-  <div class="accordion-toggle-left">
-    <div class="accordion-toggle-top">
-      <span class="accordion-pill pill-101">101</span>
-      <div class="accordion-title">Understanding the language</div>
-    </div>
+  <div class="accordion-toggle-inner">
+    <span class="accordion-pill pill-101">101</span>
+    <div class="accordion-title">Understanding the language</div>
     <div class="accordion-sub">Planets · Houses · Signs · Elements</div>
+    <div class="accordion-arrow">▾</div>
   </div>
-  <div class="accordion-arrow">▾</div>
 </button>
 <div id="body-101" class="accordion-body open">
 
@@ -1514,22 +1514,22 @@
 
 <!-- 102 TOGGLE -->
 <button class="accordion-toggle toggle-102" aria-expanded="false" onclick="toggleSection(this,'body-102')">
-  <div class="accordion-toggle-left">
-    <div class="accordion-toggle-top">
-      <span class="accordion-pill pill-102">102</span>
-      <div class="accordion-title">Build your own chart</div>
-    </div>
+  <div class="accordion-toggle-inner">
+    <span class="accordion-pill pill-102">102</span>
+    <div class="accordion-title">Build your own chart</div>
     <div class="accordion-sub">Step 1: Get your natal chart · Step 2: Build your profile</div>
+    <div class="accordion-arrow">▾</div>
   </div>
-  <div class="accordion-arrow">▾</div>
 </button>
 <div id="body-102" class="accordion-body">
 
 <!-- STEP 1: GET YOUR CHART -->
-<div class="wb-step-header" id="step-one-header">
+<div class="wb-step-header-outer">
+<div class="wb-step-header" id="step-one-header" style="border-top:none;padding-top:1.5rem">
   <div class="wb-step-num">Step one</div>
   <h3 class="wb-step-title">Get your natal chart</h3>
   <p class="wb-step-desc">Go to <a href="https://horoscopes.astro-seek.com/birth-chart-horoscope-online" target="_blank" style="color:var(--teal);font-weight:500">astro-seek.com</a> and enter your birth date, birth time, and place of birth. You'll get a chart like the one below. Here's what to look at — and what to ignore for now.</p>
+</div>
 </div>
 
 <div class="worksheet-wrap" style="padding-top:1.5rem;padding-bottom:2rem">
@@ -1591,10 +1591,12 @@
 
 
 <!-- STEP 2 -->
+<div class="wb-step-header-outer">
 <div class="wb-step-header">
   <div class="wb-step-num">Step two</div>
   <h3 class="wb-step-title">Build your profile</h3>
   <p class="wb-step-desc">Download the worksheet below, open it in Word, and fill in the sign, house, and degree for each planet from your Astro-Seek chart. Then write your own interpretation sentence using the formula: <em>Planet (what) + Sign (how) + House (where)</em>. Refer back to 101 if you need to look up what any planet, sign, or house means.</p>
+</div>
 </div>
 
 <div class="worksheet-wrap">
@@ -1681,14 +1683,12 @@ sections.forEach(s => observer.observe(s));
 
 <!-- 103 TOGGLE -->
 <button class="accordion-toggle toggle-103" aria-expanded="false" onclick="toggleSection(this,'body-103')">
-  <div class="accordion-toggle-left">
-    <div class="accordion-toggle-top">
-      <span class="accordion-pill pill-103">103</span>
-      <div class="accordion-title">Going deeper</div>
-    </div>
+  <div class="accordion-toggle-inner">
+    <span class="accordion-pill pill-103">103</span>
+    <div class="accordion-title">Going deeper</div>
     <div class="accordion-sub">Aspects · Degrees · Transits · Retrogrades · Monthly cycles</div>
+    <div class="accordion-arrow">▾</div>
   </div>
-  <div class="accordion-arrow">▾</div>
 </button>
 <div id="body-103" class="accordion-body">
 
