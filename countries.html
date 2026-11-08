@@ -419,7 +419,32 @@ const SPEECH_ALIASES = {
 const speechForm = new Map(byForm);
 list.forEach(c => (SPEECH_ALIASES[c.name] || []).forEach(a => { if (!speechForm.has(a)) speechForm.set(a, c); }));
 
-function findInPhrase(text) {
+const speechKeys = [...speechForm.keys()];
+function dist(a, b) { // edit distance, a swapped pair of letters counts as one slip
+  const m = a.length, n = b.length; if (!m) return n; if (!n) return m;
+  const d = Array.from({ length: m + 1 }, (_, i) => { const r = new Array(n + 1).fill(0); r[0] = i; return r; });
+  for (let j = 0; j <= n; j++) d[0][j] = j;
+  for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) {
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[m][n];
+}
+function fuzzy(n) { // closest country spelling, only when it's clearly closer than any other
+  if (n.length < 5) return null;
+  const limit = n.length <= 8 ? 1 : 2;
+  let best = null, bd = Infinity, second = Infinity;
+  for (const k of speechKeys) {
+    if (Math.abs(k.length - n.length) > limit || k.length < 5) continue;
+    const d = dist(n, k);
+    if (d < bd) { if (best && speechForm.get(best) !== speechForm.get(k)) second = bd; bd = d; best = k; }
+    else if (d < second && speechForm.get(k) !== speechForm.get(best)) second = d;
+  }
+  return best && bd <= limit && second > bd ? speechForm.get(best) : null;
+}
+// opts.fuzzy: allow near-miss spellings. opts.holdLast: leave the last words alone if they might still grow
+// (the browser is still listening, so "Niger" could become "Nigeria")
+function findInPhrase(text, opts = {}) {
   const words = text.split(/\s+/).filter(Boolean), hits = [], unknown = [];
   let i = 0;
   while (i < words.length) {
@@ -427,11 +452,16 @@ function findInPhrase(text) {
     for (let len = Math.min(6, words.length - i); len >= 1; len--) {
       const n = norm(words.slice(i, i + len).join(" "));
       if (!n) continue;
-      const c = speechForm.get(n);
-      if (c) { hits.push(c); i += len; matched = true; break; }
+      let c = speechForm.get(n);
+      if (!c && opts.fuzzy && len <= 4) c = fuzzy(n);
+      if (c) {
+        const atEnd = i + len === words.length;
+        if (opts.holdLast && atEnd && speechKeys.some(k => k.length > n.length && k.startsWith(n))) return { hits, unknown };
+        hits.push(c); i += len; matched = true; break;
+      }
       if (NOT_COUNTRIES[n]) { hits.push({ not: NOT_COUNTRIES[n] }); i += len; matched = true; break; }
     }
-    if (!matched) { const w = norm(words[i]); if (w && !["and", "a", "um", "uh", "er"].includes(w)) unknown.push(words[i]); i++; }
+    if (!matched) { const w = norm(words[i]); if (w && !["and", "a", "um", "uh", "er", "oh"].includes(w)) unknown.push(words[i]); i++; }
   }
   return { hits, unknown };
 }
@@ -446,23 +476,29 @@ function startListening() {
   if (!Rec || !running) return;
   if (!rec) {
     rec = new Rec();
-    rec.continuous = true; rec.interimResults = true; rec.maxAlternatives = 3;
+    rec.continuous = true; rec.interimResults = true; rec.maxAlternatives = 5;
     rec.lang = "en-NZ";
     rec.onresult = ev => {
       let interim = "";
       for (let i = ev.resultIndex; i < ev.results.length; i++) {
         const r = ev.results[i];
-        if (!r.isFinal) { interim += r[0].transcript; continue; }
-        // Try each alternative the browser offers and keep the one that finds the most countries
+        if (!r.isFinal) { interim += " " + r[0].transcript; continue; }
+        // Final words: try each alternative the browser offers, with near-miss spellings allowed
         let best = null;
         for (let a = 0; a < r.length; a++) {
-          const res = findInPhrase(r[a].transcript);
-          const score = res.hits.filter(h => h.name).length;
+          const res = findInPhrase(r[a].transcript, { fuzzy: true });
+          const score = res.hits.filter(h => h.name && !found.has(h)).length * 10 + res.hits.filter(h => h.name).length;
           if (!best || score > best.score) best = { ...res, score, text: r[a].transcript };
         }
-        handleHeard(best);
+        handleHeard(best, true);
       }
-      if (interim) { heard.hidden = false; heard.innerHTML = ""; heard.append("Hearing: "); const b = document.createElement("b"); b.textContent = interim; heard.appendChild(b); }
+      if (interim.trim()) {
+        // Still talking: count anything already clear straight away
+        const res = findInPhrase(interim, { holdLast: true });
+        handleHeard({ ...res, unknown: [], text: interim }, false);
+        heard.hidden = false; heard.innerHTML = ""; heard.append("Hearing: ");
+        const b = document.createElement("b"); b.textContent = interim.trim(); heard.appendChild(b);
+      }
     };
     rec.onerror = ev => {
       if (ev.error === "no-speech" || ev.error === "aborted") return;
@@ -472,27 +508,30 @@ function startListening() {
         ? "The microphone isn't available. Allow microphone access for this site in your browser settings, then press Speak again."
         : "Voice entry stopped (" + ev.error + "). Press Speak to try again.";
     };
-    rec.onend = () => { if (listening && running) setTimeout(() => { try { rec.start(); } catch (e) {} }, 200); };
+    rec.onend = () => { if (listening && running) { try { rec.start(); } catch (e) { setTimeout(() => { try { rec.start(); } catch (e2) {} }, 150); } } };
   }
   try { rec.start(); setMic(true); usedVoice = true; note.textContent = "Say the countries out loud. You can still type at the same time."; note.className = "note"; }
   catch (e) { setMic(true); }
 }
 function stopListening() { if (rec && listening) { setMic(false); try { rec.stop(); } catch (e) {} } else setMic(false); }
 
-function handleHeard(res) {
-  const added = [], already = [], nots = [];
+const justAdded = new Map(); // country -> time, so a name counted mid-sentence isn't reported as a repeat
+function handleHeard(res, isFinal) {
+  const added = [], already = [], nots = [], now = performance.now();
   res.hits.forEach(h => {
     if (h.not) { nots.push(h.not); return; }
-    if (found.has(h)) { if (!added.includes(h)) already.push(h.name); return; }
-    accept(h, true); added.push(h);
+    if (found.has(h)) { if (now - (justAdded.get(h) || -1e9) > 15000 && !already.includes(h.name)) already.push(h.name); return; }
+    accept(h, true); added.push(h); justAdded.set(h, now);
   });
+  if (!running) return;
+  if (added.length) { note.textContent = "Got " + added.map(c => c.name).join(", ") + "."; note.className = "note ok"; }
+  if (!isFinal) return;
   heard.hidden = false; heard.innerHTML = ""; heard.append("Heard: ");
   const b = document.createElement("b"); b.textContent = res.text.trim(); heard.appendChild(b);
-  if (!running) return;
+  if (added.length) return;
   if (nots.length) { note.textContent = nots[0]; note.className = "note warn"; }
-  else if (already.length && !added.length) { note.textContent = `You already have ${already.join(", ")}.`; note.className = "note"; }
-  else if (!added.length && res.unknown.length) { note.textContent = "That didn't match a country. Try saying it again, or type it."; note.className = "note warn"; }
-  else if (added.length) { note.textContent = "Got " + added.map(c => c.name).join(", ") + "."; note.className = "note ok"; }
+  else if (already.length) { note.textContent = `You already have ${already.join(", ")}.`; note.className = "note"; }
+  else if (res.unknown.length && !res.hits.length) { note.textContent = "That didn't match a country. Try saying it again, or type it."; note.className = "note warn"; }
 }
 $("micBtn").onclick = () => { if (listening) stopListening(); else startListening(); };
 
