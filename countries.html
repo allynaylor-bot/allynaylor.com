@@ -150,7 +150,7 @@ select { font: inherit; font-size: 15px; padding: 7px 10px; border-radius: 8px; 
   <header>
     <div>
       <h1>Countries and Capitals</h1>
-      <p class="lede">Click a country, then name it and its capital. It fills in with its continent colour once you have both.</p>
+      <p class="lede">Type a country and its capital, and it fills in on the map. Or click a country, or let it quiz you.</p>
     </div>
     <div class="stats" aria-live="polite">
       <div class="stat big"><small>Pairs</small><b><span id="pairs">0</span><span class="of"> / <span id="pairsTotal">197</span></span></b></div>
@@ -169,6 +169,7 @@ select { font: inherit; font-size: 15px; padding: 7px 10px; border-radius: 8px; 
     <div class="seg" role="group" aria-label="Mode">
       <button type="button" id="modeFree" aria-pressed="true">Free play</button>
       <button type="button" id="modeQuiz" aria-pressed="false">Quiz me</button>
+      <button type="button" id="modeType" aria-pressed="false">Type both</button>
     </div>
     <label class="check"><input type="checkbox" id="hintsToggle" checked> Colour the map by continent</label>
     <span class="grow"></span>
@@ -178,23 +179,29 @@ select { font: inherit; font-size: 15px; padding: 7px 10px; border-radius: 8px; 
   <div class="chips" id="chips"></div>
   <div class="win" id="win" hidden></div>
 
-  <div class="mapbox">
-    <svg id="map" viewBox="0 0 960 500" role="img" aria-label="World map with country borders. Select a country to name it and its capital."></svg>
-    <div class="zoom">
-      <button type="button" id="zin" aria-label="Zoom in">+</button>
-      <button type="button" id="zout" aria-label="Zoom out">&minus;</button>
-      <button type="button" id="zreset" aria-label="Zoom to the region">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>
-      </button>
-    </div>
-    <div class="maphint">Scroll or pinch to zoom. Tiny countries are circles. Grey shapes are territories.</div>
-  </div>
-
   <div class="panel">
     <div id="idleView">
       <p class="feedback info" id="idleMsg"></p>
       <p class="idle" id="idleText">Click any country on the map to start, or switch to Quiz me.</p>
     </div>
+    <form id="typeView" hidden autocomplete="off">
+      <h2>Type a country and its capital</h2>
+      <div class="pair">
+        <div class="field" id="ftCountry">
+          <label for="tCountry">Country <span class="state" id="stCountry"></span></label>
+          <input id="tCountry" type="text" autocapitalize="words" spellcheck="false" placeholder="Any country" enterkeyhint="next">
+        </div>
+        <div class="field" id="ftCapital">
+          <label for="tCapital">Capital <span class="state" id="stCapital"></span></label>
+          <input id="tCapital" type="text" autocapitalize="words" spellcheck="false" placeholder="Its capital" enterkeyhint="done">
+        </div>
+      </div>
+      <p class="feedback info" id="tMsg" aria-live="polite">Start with either box. When both match, the country fills in and the boxes clear for the next one.</p>
+      <div class="row">
+        <button class="btn" type="button" id="tClear">Clear</button>
+        <label class="check" style="font-size:15px"><input type="checkbox" id="tFollow"> Zoom the map to each country</label>
+      </div>
+    </form>
     <form id="askView" hidden autocomplete="off">
       <h2><span id="askTitle">Which country is this, and what is its capital?</span><span class="tag" id="contTag"></span></h2>
       <div class="pair">
@@ -216,6 +223,18 @@ select { font: inherit; font-size: 15px; padding: 7px 10px; border-radius: 8px; 
         <button class="btn quiet" type="button" id="skipBtn">Skip</button>
       </div>
     </form>
+  </div>
+
+  <div class="mapbox">
+    <svg id="map" viewBox="0 0 960 500" role="img" aria-label="World map with country borders. Select a country to name it and its capital."></svg>
+    <div class="zoom">
+      <button type="button" id="zin" aria-label="Zoom in">+</button>
+      <button type="button" id="zout" aria-label="Zoom out">&minus;</button>
+      <button type="button" id="zreset" aria-label="Zoom to the region">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>
+      </button>
+    </div>
+    <div class="maphint">Scroll or pinch to zoom. Tiny countries are circles. Grey shapes are territories.</div>
   </div>
 
   <div class="row" style="justify-content: space-between">
@@ -540,6 +559,7 @@ function setField(which) {
   s.textContent = known ? "✓ Right" : shown ? "Shown" : "";
 }
 function select(c) {
+  if (mode === "type") setMode("free");
   selected = c; startTimer();
   idleView.hidden = true; askView.hidden = false;
   inC.value = ""; inK.value = ""; ["mCountry", "mCapital"].forEach(id => { $(id).textContent = ""; $(id).className = "msg"; });
@@ -552,7 +572,9 @@ function select(c) {
 }
 const idleView = $("idleView"), askView = $("askView");
 function deselect(msg) {
-  selected = null; askView.hidden = true; idleView.hidden = false;
+  selected = null; askView.hidden = true;
+  if (mode === "type") { paint(); return; }
+  idleView.hidden = false;
   $("idleMsg").textContent = msg || ""; $("idleMsg").className = "feedback " + (msg && msg.startsWith("Yes") ? "ok" : "info");
   $("idleText").textContent = mode === "quiz" ? "" : "Click the next country.";
   paint();
@@ -627,6 +649,88 @@ $("showBtn").onclick = () => {
 };
 $("skipBtn").onclick = () => { if (mode === "quiz") nextQuiz(selected); else deselect(); };
 
+// ---------- type both ----------
+const tC = $("tCountry"), tK = $("tCapital");
+let tPickC = null, tPickK = null; // country found from each box
+const flash = new Map();
+function tLock(box, c, on) {
+  const isC = box === "c", f = $(isC ? "ftCountry" : "ftCapital"), inp = isC ? tC : tK, s = $(isC ? "stCountry" : "stCapital");
+  f.classList.toggle("right", on); inp.readOnly = on;
+  if (on) inp.value = isC ? c.name : c.capital;
+  s.textContent = on ? "✓" : "";
+}
+function tSay(text, cls) { const m = $("tMsg"); m.textContent = text; m.className = "feedback " + (cls || "info"); }
+function tReset(keepMsg) {
+  tPickC = tPickK = null; tC.value = tK.value = ""; tLock("c", null, false); tLock("k", null, false);
+  selected = null; paint(); if (!keepMsg) tSay("Start with either box. When both match, the country fills in and the boxes clear for the next one.");
+  try { tC.focus({ preventScroll: true }); } catch (e) { tC.focus(); }
+}
+function tShow(c) { selected = c; paint(); if ($("tFollow").checked) focusOn(c); }
+function tFind(box, fromEnter, ignoreGrow) {
+  const isC = box === "c", inp = isC ? tC : tK, map = isC ? countryForm : capitalForm;
+  const n = norm(inp.value); if (!n) return null;
+  const want = isC ? tPickK : tPickC; // the country the other box already points to
+  let c = map.get(n);
+  if (want && (isC ? want.forms : want.capForms).includes(n)) c = want;
+  if (c) {
+    const couldGrow = [...map.keys()].some(f => f.length > n.length && f.startsWith(n) && !done(map.get(f)));
+    if (couldGrow && !fromEnter && !ignoreGrow && c !== want) { tWait(box); return null; } // "Niger" might still become "Nigeria"
+    return c;
+  }
+  if (!fromEnter) return null;
+  if (want) { // allow a small slip when we know which one you mean
+    const lim = n.length <= 5 ? 1 : n.length <= 9 ? 2 : 3;
+    if (Math.min(...(isC ? want.forms : want.capForms).map(f => dist(n, f))) <= lim) return want;
+  }
+  let best = null, bd = Infinity, second = Infinity;
+  map.forEach((cc, f) => { const d = dist(n, f); if (d < bd) { if (best && best !== cc) second = bd; bd = d; best = cc; } else if (d < second && cc !== best) second = d; });
+  const lim = n.length <= 5 ? 1 : n.length <= 9 ? 2 : 3;
+  return bd <= lim && second > bd ? best : null;
+}
+let tTimer = null;
+function tWait(box) { clearTimeout(tTimer); tTimer = setTimeout(() => tCheck(box, false, true), 900); }
+function tCheck(box, fromEnter, ignoreGrow) {
+  if (mode !== "type") return;
+  if (!ignoreGrow) clearTimeout(tTimer);
+  startTimer();
+  const isC = box === "c";
+  if ((isC && tPickC) || (!isC && tPickK)) return;
+  const c = tFind(box, fromEnter, ignoreGrow);
+  if (!c) {
+    if (fromEnter) {
+      const n = norm((isC ? tC : tK).value), extra = isC ? NOT_COUNTRIES[n] : OLD_CAPITALS[n];
+      tSay(extra || (isC ? "That isn't on the list of 197. Check the spelling." : "That isn't one of the 197 capitals. Check the spelling."), "info");
+    }
+    return;
+  }
+  const other = isC ? tPickK : tPickC;
+  if (other && other !== c) {
+    tSay(isC ? `${other.capital} isn't in ${c.name}. It's the capital of ${other.name}.` : `${c.capital} is the capital of ${c.name}, not ${other.name}.`, "warn");
+    if (fromEnter) { miss(other); (isC ? tC : tK).select(); }
+    return;
+  }
+  if (done(c) && !other) { tSay(`You already have ${c.name} and ${c.capital}.`); (isC ? tC : tK).value = ""; return; }
+  if (isC) { tPickC = c; tLock("c", c, true); } else { tPickK = c; tLock("k", c, true); }
+  tShow(c);
+  if (tPickC && tPickK) {
+    st.c[c.name] = 1; st.k[c.name] = 1; save();
+    tSay(`✓ ${c.name}, ${c.capital}` + (c.note ? `. ${c.note}` : ""), "ok");
+    checkRegionComplete();
+    setTimeout(() => tReset(true), 350);
+    return;
+  }
+  tSay(isC ? `${c.name}. Now its capital.` : `${c.capital}. Which country is it the capital of?`);
+  const next = isC ? tK : tC; try { next.focus({ preventScroll: true }); } catch (e) { next.focus(); }
+}
+tC.addEventListener("input", () => tCheck("c", false));
+tK.addEventListener("input", () => tCheck("k", false));
+[["c", tC], ["k", tK]].forEach(([b, el]) => el.addEventListener("keydown", e => {
+  if (e.key === "Enter") { e.preventDefault(); if (el.readOnly) (b === "c" ? tK : tC).focus(); else tCheck(b, true); }
+  if (e.key === "Escape") tReset();
+}));
+$("typeView").addEventListener("submit", e => e.preventDefault());
+$("tClear").onclick = () => tReset();
+
 // ---------- quiz ----------
 function nextQuiz(skip) {
   const pool = list.filter(c => inRegion(c) && !finished(c) && c !== skip);
@@ -638,12 +742,16 @@ function nextQuiz(skip) {
   select(pool[i]);
 }
 function setMode(m) {
-  mode = m; $("modeFree").setAttribute("aria-pressed", m === "free"); $("modeQuiz").setAttribute("aria-pressed", m === "quiz");
-  if (m === "quiz" && !selected) nextQuiz(); else if (m === "free" && !selected) deselect();
+  mode = m; st.mode = m; save();
+  $("modeFree").setAttribute("aria-pressed", m === "free"); $("modeQuiz").setAttribute("aria-pressed", m === "quiz"); $("modeType").setAttribute("aria-pressed", m === "type");
+  if (m === "type") { askView.hidden = true; idleView.hidden = true; $("typeView").hidden = false; tReset(); return; }
+  $("typeView").hidden = true;
+  if (m === "quiz") { if (!selected) nextQuiz(); else idleView.hidden = true; } else if (!selected) deselect();
 }
 $("modeFree").onclick = () => setMode("free");
 $("modeQuiz").onclick = () => setMode("quiz");
-function setRegion(r) { st.region = r; $("region").value = r; save(); if (selected && !inRegion(selected)) deselect(); paint(); zoomToRegion(); if (mode === "quiz" && !selected) nextQuiz(); }
+$("modeType").onclick = () => setMode("type");
+function setRegion(r) { st.region = r; $("region").value = r; save(); if (selected && !inRegion(selected)) deselect(); paint(); zoomToRegion(); if (mode === "quiz" && !selected) nextQuiz(); if (mode === "type") tReset(); }
 $("region").onchange = e => setRegion(e.target.value);
 $("hintsToggle").onchange = e => { st.hints = e.target.checked; save(); $("contTag").hidden = !st.hints; paint(); };
 
@@ -673,6 +781,7 @@ $("resetBtn").onclick = () => ask(`Clear your progress for ${st.region === "ALL"
 // ---------- start ----------
 $("region").value = st.region; $("hintsToggle").checked = st.hints; $("clock").textContent = fmt(st.elapsed);
 deselect(); zoomToRegion();
+setMode(st.mode || "type");
 </script>
 </body>
 </html>
